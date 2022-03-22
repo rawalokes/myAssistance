@@ -25,7 +25,7 @@ public class TaskDto {
 
     @NotEmpty(message = "Name cannot be empty")
     @Size(min = 3,message = "Invalid name")
-    @Pattern(regexp = "^[a-zA-Z]",message = "Name cannot have special character or number")
+    @Pattern(regexp = "[a-zA-Z]+",message = "Name cannot have special character or number")
     private String name;
 
     @NotEmpty(message = "Starting time cannot be empty")
