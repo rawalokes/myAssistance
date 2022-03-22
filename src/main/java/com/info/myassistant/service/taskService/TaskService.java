@@ -1,4 +1,4 @@
-package com.info.myassistant.service.task;
+package com.info.myassistant.service.taskService;
 
 import com.info.myassistant.dto.taskDto.TaskDto;
 import com.info.myassistant.shared.service.GenericService;

@@ -4,7 +4,7 @@ import com.info.myassistant.dto.responseDto.ResponseDto;
 import com.info.myassistant.dto.taskDto.TaskDto;
 import com.info.myassistant.model.task.Task;
 import com.info.myassistant.repo.task.TaskRepo;
-import com.info.myassistant.service.task.TaskService;
+import com.info.myassistant.service.taskService.TaskService;
 import com.info.myassistant.shared.controller.BaseResponse;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +36,11 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
             return errorResponse("Failed",null);
         }
 
+    }
+
+    @Override
+    public ResponseDto findByID(Integer integer) {
+        return null;
     }
 
     @Override
