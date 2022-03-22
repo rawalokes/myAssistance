@@ -34,6 +34,11 @@ public class Task {
 
     private String remarks;
 
+
+    /**
+     *  convert TaskDto into Task
+     * @param taskDto
+     */
     public Task(TaskDto taskDto) {
         this.taskId = taskDto.getTaskId();
         this.name = taskDto.getName();
