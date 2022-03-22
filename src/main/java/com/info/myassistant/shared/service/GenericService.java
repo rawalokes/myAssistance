@@ -7,5 +7,5 @@ import java.util.List;
 public interface GenericService <T,ID>{
     ResponseDto create (T t);
     ResponseDto findByID(ID id);
-    ResponseDto findAllById(ID id);
+
 }

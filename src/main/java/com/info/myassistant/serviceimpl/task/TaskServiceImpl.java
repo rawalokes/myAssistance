@@ -32,33 +32,24 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
             Task task = new Task(taskDto);
             taskRepo.save(task);
             return successResponse("Task Added successfully", null);
-        }catch (Exception e){
-            return errorResponse("Failed",null);
+        } catch (Exception e) {
+            return errorResponse("Failed", null);
         }
 
     }
 
     @Override
     public ResponseDto findByID(Integer integer) {
-        return null;
-    }
+        Optional<Task> task = taskRepo.findById(integer);
 
-    @Override
-    public ResponseDto findAllById(Integer integer) {
-        Optional <Task> task= taskRepo.findById(integer);
-
-        if (task!=null){
+        if (task != null) {
             TaskDto taskDto = new TaskDto(task.get());
-            return ResponseDto.builder()
-                    .message("")
-                    .data(taskDto)
-                    .build();
-        }else {
-            return ResponseDto.builder()
-                    .message("Task Not Found")
-                    .build();
+            return successResponse("", taskDto);
+        } else {
+            return errorResponse("Task not found", null);
         }
 
 
     }
+
 }

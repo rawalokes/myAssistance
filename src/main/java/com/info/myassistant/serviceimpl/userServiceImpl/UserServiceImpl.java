@@ -2,6 +2,7 @@ package com.info.myassistant.serviceimpl.userServiceImpl;
 
 import com.info.myassistant.dto.responseDto.ResponseDto;
 import com.info.myassistant.dto.userDto.UserDto;
+import com.info.myassistant.model.user.User;
 import com.info.myassistant.service.userService.UserService;
 import com.info.myassistant.shared.controller.BaseResponse;
 
@@ -13,6 +14,8 @@ import com.info.myassistant.shared.controller.BaseResponse;
 public class UserServiceImpl extends BaseResponse implements UserService {
     @Override
     public ResponseDto create(UserDto userDto) {
+
+
         return null;
     }
 
@@ -21,8 +24,4 @@ public class UserServiceImpl extends BaseResponse implements UserService {
         return null;
     }
 
-    @Override
-    public ResponseDto findAllById(Integer integer) {
-        return null;
-    }
 }
