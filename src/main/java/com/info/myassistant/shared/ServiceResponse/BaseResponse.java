@@ -1,4 +1,4 @@
-package com.info.myassistant.shared.controller;
+package com.info.myassistant.shared.ServiceResponse;
 
 import com.info.myassistant.dto.responseDto.ResponseDto;
 

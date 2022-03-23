@@ -5,7 +5,7 @@ import com.info.myassistant.dto.taskDto.TaskDto;
 import com.info.myassistant.model.task.Task;
 import com.info.myassistant.repo.task.TaskRepo;
 import com.info.myassistant.service.taskService.TaskService;
-import com.info.myassistant.shared.controller.BaseResponse;
+import com.info.myassistant.shared.ServiceResponse.BaseResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

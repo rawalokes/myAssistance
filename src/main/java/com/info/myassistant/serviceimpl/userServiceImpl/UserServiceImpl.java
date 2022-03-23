@@ -5,7 +5,7 @@ import com.info.myassistant.dto.userDto.UserDto;
 import com.info.myassistant.model.user.User;
 import com.info.myassistant.repo.user.UserRepo;
 import com.info.myassistant.service.userService.UserService;
-import com.info.myassistant.shared.controller.BaseResponse;
+import com.info.myassistant.shared.ServiceResponse.BaseResponse;
 
 import java.util.Optional;
 
