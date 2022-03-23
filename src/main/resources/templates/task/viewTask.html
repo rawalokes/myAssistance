@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <
+    <link rel="stylesheet" th:href="@{../bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{../bootstrap/robotoFont.css}">
+    <link rel="stylesheet" th:href="@{../static/bootstrap/_media.css}">
+    <link rel="stylesheet" th:href="@{../bootstrap/_stretched-link.css}">
+
+    <link rel="stylesheet" th:href="@{../css/style.css}">
+    <title>Todo</title>
+</head>
+<body>
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar" class="">
+        <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                <i class="fa fa-bars"></i>
+                <span class="sr-only">Toggle Menu</span>
+            </button>
+        </div>
+        <div class="p-4 pt-5">
+            <h1><a href="index.html" class="logo">Assistant</a></h1>
+
+
+            <ul class="list-unstyled components mb-5">
+                <li>
+                    <button class="btn btn-toggle align-items-center rounded collapsed"><a class="link-all"
+                                                                                           href="weather.html">Weather</a>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-toggle align-items-center rounded collapsed dropdown-toggle"
+                            data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"><a
+                            id="active" class="link-all" href="todo.html">Todo</a></button>
+                    <div class="collapse" id="dashboard-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="view-task.html" class="link-dark rounded task">View Task</a></li>
+                            <li><a href="add-task.html" class="link-dark rounded task">Add Task</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#account-collapse" aria-expanded="false"><a class="link-all"
+                                                                                        href="account.html">Account</a>
+                    </button>
+                    <div class="collapse" id="account-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a href="view-income.html" class="link-dark rounded task">Income</a></li>
+                            <li><a href="expenses.html" class="link-dark rounded task">Expenses</a></li>
+                            <li><a href="sources.html" class="link-dark rounded task">Sources</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <div id="btn-click">
+            <button class="cssbuttons-io-button">
+                <span><a class="link-all" th:href="@{~/task/create}">Add Task</a></span>
+            </button>
+        </div>
+        <div class="table-wrapper">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Starting Time</th>
+                    <th>Ending Time</th>
+                    <th>Status</th>
+                    <th>Remarks</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="task,index : ${taskList}">
+                    <td th:text="${task.name}"></td>
+                    <td th:text="${task.startTime}"></td>
+                    <td th:text="${task.deadline}"></td>
+
+                    <td>
+                        <select class="custom-select">
+                            <option selected>Select</option>
+                            <option value="1">Complete</option>
+                            <option value="2">Pending</option>
+                            x
+                        </select>
+                    </td>
+                    <td th:text="${task.remarks}"></td>
+                    <td>
+                        <button type="button" class="btn btn-success">Edit</button>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
+                </tr>
+
+                <tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div th:replace="fragment/generics :: javascript"></div>
+</div>
+</body>
+</html>

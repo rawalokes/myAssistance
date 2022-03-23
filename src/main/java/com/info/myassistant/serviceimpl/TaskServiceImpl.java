@@ -8,7 +8,9 @@ import com.info.myassistant.service.TaskService;
 import com.info.myassistant.shared.BaseResponse;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author rawalokes
@@ -36,6 +38,10 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
             return errorResponse("Failed", null);
         }
 
+    }
+    public List<TaskDto> findAll(){
+        List<Task> tasks=taskRepo.findAll();
+        return tasks.stream().map(t ->new TaskDto(t)).collect(Collectors.toList());
     }
 
     @Override

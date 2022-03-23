@@ -1,12 +1,15 @@
 package com.info.myassistant.dto;
 
 import com.info.myassistant.model.Task;
+import jdk.jfr.Timestamp;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author rawalokes
@@ -31,6 +34,7 @@ public class TaskDto {
     private String startTime;
 
     @NotEmpty(message = "Deadline cannot be empty")
+
     private String deadline;
 
     private LocalDate date;
@@ -38,18 +42,20 @@ public class TaskDto {
     @Size(min = 5,message = "Minimum five character required")
     private String remarks;
 
+    private List<Integer> userId;
+
     /**
      * convert Task into Task Dto
      * @param task
      */
     public TaskDto(Task task){
-
         this.taskId=task.getTaskId();
         this.name=task.getName();
         this.date=task.getDate();
         this.startTime=task.getStartTime();
         this.deadline=task.getDeadline();
         this.remarks=task.getRemarks();
+        this.userId= task.getUser().stream().map(u->u.getUserId()).collect(Collectors.toList());
     }
 
 }

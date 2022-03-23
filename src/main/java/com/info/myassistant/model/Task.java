@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author rawalokes
@@ -33,6 +34,9 @@ public class Task {
     private LocalDate date;
 
     private String remarks;
+
+    @OneToMany
+    private List<User> user;
 
 
     /**

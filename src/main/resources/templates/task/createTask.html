@@ -60,30 +60,37 @@
         <h5>Add Task</h5>
         <hr />
     </div>
-    <form class="form-data">
+    <form th:action="@{/task/create}" th:object="${taskDetails}" th:method="post" class="form-data">
         <div class="row item-row">
             <div class="col-md-3">
                 <label th:for="inputName" class="form-label fw-bold">Name</label>
-                <input type="text" class="form-control " name="name" />
+                <input th:field="*{name}" type="text" class="form-control " name="name" />
+                <p th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}" />
             </div>
+
         </div>
         <div class="row item-row">
             <div class="col-md-3 mt-4">
                 <label th:for="inputTime" class="form-label fw-bold">Starting Time</label>
-                <input type="time" class="form-control " name="stime" />
+                <input th:field="*{startTime}"type="time" class="form-control " name="stime" />
+                <p th:if="${#fields.hasErrors('startTime')}" th:errorclass="error" th:errors="*{startTime}" />
             </div>
         </div>
         <div class="row item-row mt-4">
             <div class="col-md-3">
                 <label th:for="inputTime2" class="form-label fw-bold">Deadline</label>
-                <input type="time" class="form-control " name="etime" />
+                <input th:field="*{deadline}"type="time" class="form-control " name="etime" />
+                <p th:if="${#fields.hasErrors('deadline')}" th:errorclass="error" th:errors="*{deadline}" />
+
             </div>
         </div>
         <div class="row item-row mt-4">
             <div class="col-md-3">
                 <label th:for="inputAddress" class="form-label fw-bold">Remarks</label>
                 <!-- <input type="password" class="form-control" name="remarks" /> -->
-                <textarea class="input100 form-control" name="message"></textarea>
+                <textarea th:field="*{remarks}"class="input100 form-control" name="message"></textarea>
+                <p th:if="${#fields.hasErrors('remarks')}" th:errorclass="error" th:errors="*{remarks}" />
+
             </div>
         </div>
 

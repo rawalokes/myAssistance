@@ -1261,3 +1261,6 @@ th {
 }
 
 .btn.btn-primary:hover {background-color: #0c2731}
+.error {
+    color: red;
+}
