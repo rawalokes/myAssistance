@@ -1,5 +1,6 @@
 package com.info.myassistant.model;
 
+import com.info.myassistant.dto.IncomeDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,7 +26,7 @@ public class Income {
 
     private Double amount;
 
-    private String discription;
+    private String description;
     @ManyToOne
     @JoinColumn(name = "source_id",referencedColumnName = "income_Id",
     foreignKey = @ForeignKey(name = "fk_income_source"))
@@ -35,4 +36,12 @@ public class Income {
     @JoinColumn(name = "user_id",referencedColumnName = "income_Id",
             foreignKey = @ForeignKey(name = "fk_income_user"))
     private Income income;
+
+
+    public Income(IncomeDto incomeDto) {
+        this.incomeId = incomeDto.getIncomeId();
+        this.amount = incomeDto.getAmount();
+        this.description=incomeDto.getDescription();
+
+    }
 }

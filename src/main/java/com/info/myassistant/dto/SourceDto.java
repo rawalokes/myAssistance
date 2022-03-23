@@ -1,5 +1,6 @@
 package com.info.myassistant.dto;
 
+import com.info.myassistant.model.Source;
 import lombok.*;
 
 import javax.validation.constraints.*;
@@ -23,4 +24,10 @@ public class SourceDto {
     @NotEmpty(message = "Description cannot be Empty")
     @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "Description cannot be Empty")
     private String description;
+
+    public SourceDto(Source source) {
+        this.id = source.getId();
+        this.source= source.getSource();
+        this.description = source.getDescription();
+    }
 }

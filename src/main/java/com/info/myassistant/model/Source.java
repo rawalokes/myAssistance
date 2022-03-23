@@ -1,5 +1,6 @@
 package com.info.myassistant.model;
 
+import com.info.myassistant.dto.SourceDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -22,8 +23,12 @@ public class Source {
     @SequenceGenerator(name = "source_seq_gen",sequenceName = "source_seq",allocationSize = 1)
     private Integer id;
 
-    private Double amount;
-    private String discription;
+    private String source;
+    private String description;
 
-
+    public Source(SourceDto sourceDto) {
+        this.id = sourceDto.getId();
+        this.source=sourceDto.getSource();
+        this.description = sourceDto.getDescription();
+    }
 }

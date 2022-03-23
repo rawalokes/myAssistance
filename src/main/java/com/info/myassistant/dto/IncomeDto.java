@@ -1,5 +1,6 @@
 package com.info.myassistant.dto;
 
+import com.info.myassistant.model.Income;
 import lombok.*;
 
 import javax.validation.constraints.Min;
@@ -31,4 +32,11 @@ public class IncomeDto {
     private String description;
     @NotNull(message = "Please select a source")
     private Integer sourceId;
+
+    public IncomeDto(Income income) {
+        this.incomeId = income.getIncomeId();
+        this.amount = income.getAmount();
+        this.description = income.getDescription();
+        this.sourceId = income.getSource().getId();
+    }
 }
