@@ -18,15 +18,15 @@
     <div id="content" class="p-4 p-md-5 pt-5">
 
         <div id="btn-click">
-            <a class="link-all" th:href="@{~/task/pending}">
+            <a class="link-all" th:href="@{~/task/get-all}">
                 <button class="cssbuttons-io-button">
-                    <span>Pending Task</span>
+                    <span>Today's Task</span>
                 </button>
             </a>
             <a class="link-all" th:href="@{~/task/create}">
-            <button class="cssbuttons-io-button">
-                 <span>Add Task</span>
-            </button>
+                <button class="cssbuttons-io-button">
+                    <span>Add Task</span>
+                </button>
             </a>
 
         </div>
@@ -36,24 +36,20 @@
                 <tr>
                     <th>SN</th>
                     <th>Name</th>
-
                     <th>Remarks</th>
+                    <th>Date</th>
                     <th>Status</th>
-                    <th>Action</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="task,index : ${taskList}">
+                <tr th:each="task,index : ${pendingTaskList}">
                     <td th:text="${index.count}"></td>
                     <td th:text="${task.name}"></td>
                     <td th:text="${task.remarks}"></td>
+                    <td th:text="${task.date}"></td>
                     <td th:text="${task.taskStatus}"></td>
 
-                    <td>
-                      <a th:href="@{~/task/complete/{id} (id= ${task.taskId})}" >  <button type="button" class="btn btn-danger">Complete</button></a>
-                        <a th:href="@{~/task/edit/{id} (id= ${task.taskId})}" >  <button type="button" class="btn btn-success">Edit</button></a>
-
-                    </td>
                 </tr>
 
                 <tbody>

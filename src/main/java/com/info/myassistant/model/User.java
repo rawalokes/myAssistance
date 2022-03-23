@@ -21,14 +21,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq_gen")
     @SequenceGenerator(name = "user_seq_gen", sequenceName = "user_seq", allocationSize = 1)
-    private Integer userId;
+    private Integer id;
     private String name;
     private String email;
     private String password;
 
-
     public User(UserDto userDto) {
-        this.userId = userDto.getUserId();
+        this.id = userDto.getUserId();
         this.name = userDto.getName();
         this.email = userDto.getEmail();
         this.password = userDto.getPassword();

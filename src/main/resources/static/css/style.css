@@ -212,6 +212,7 @@ button {
 [type="reset"]:not(:disabled),
 [type="submit"]:not(:disabled),
 button:not(:disabled) {
+    margin-left: 100px;
     cursor: pointer;
 }
 
@@ -733,8 +734,11 @@ h6 {
 .p-5 {
     padding: 3rem !important;
 }
-
+.nav-height{
+    height: 100vh;
+}
 .pt-5 {
+
     padding-top: 3rem !important;
 }
 
