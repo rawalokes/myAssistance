@@ -14,11 +14,12 @@
     <div th:insert="fragment/generics :: sidenavbar" ></div>
     <div id="content2" class="p-4 p-md-3 pt-5">
         <div class="add-task">
-            <h5>Add Category</h5>
+            <h5>Add Source</h5>
             <hr />
         </div>
-        <form class="form-data" th:action="@{~/source/create}" th:method="post" th:object="${source}">
+        <form class="form-data" th:action="@{~/source/create}" th:method="post" th:object="${SourceDetails}">
             <div class="row item-row">
+                <input type="hidden" name="id" th:field="*{id}">
                 <div class="col-md-3">
                     <label th:for="inputName" class="form-label fw-bold">Name</label>
                     <input th:field="*{source}" type="text" class="form-control " name="name" />

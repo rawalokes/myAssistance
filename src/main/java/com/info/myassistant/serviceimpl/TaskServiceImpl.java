@@ -51,7 +51,6 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
     @Override
     public ResponseDto findByID(Integer integer) {
         Optional<Task> task = taskRepo.findById(integer);
-
         if (task != null) {
             TaskDto taskDto = new TaskDto(task.get());
             return successResponse("", taskDto);

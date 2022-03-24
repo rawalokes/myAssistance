@@ -9,6 +9,7 @@ import com.info.myassistant.shared.BaseResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -19,28 +20,34 @@ import java.util.stream.Collectors;
 @Service
 public class SourceServiceImpl extends BaseResponse implements SourceService {
     private final SourceRepo sourceRepo;
+
     public SourceServiceImpl(SourceRepo sourceRepo) {
         this.sourceRepo = sourceRepo;
     }
 
     @Override
     public ResponseDto create(SourceDto sourceDto) {
-        if (sourceDto!=null){
-            Source source= new Source(sourceDto);
+        if (sourceDto != null) {
+            Source source = new Source(sourceDto);
             sourceRepo.save(source);
-            return successResponse("Source added successfully",null);
+            return successResponse("Source added successfully", null);
         }
-        return errorResponse("Please Try again",null);
+        return errorResponse("Please Try again", null);
     }
 
     @Override
     public ResponseDto findByID(Integer integer) {
-        return null;
+     Optional<Source> source=sourceRepo.findById(integer);
+     if (source.isPresent()){
+         return successResponse("",new SourceDto(source.get()));
+     }
+     return errorResponse("Source not found",null);
     }
+
 
     @Override
     public List<SourceDto> findAllSource() {
-        List<Source> sources=sourceRepo.findAll();
+        List<Source> sources = sourceRepo.findAll();
         return sources.stream().map(source -> new SourceDto(source)).collect(Collectors.toList());
     }
 }

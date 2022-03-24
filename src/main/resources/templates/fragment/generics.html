@@ -40,8 +40,8 @@
                         <button class="btn btn-toggle align-items-center rounded collapsed dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"><a class="link-all" href="todo.html">Todo</a></button>
                         <div class="collapse" id="dashboard-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="view-task.html" class="link-dark rounded task">View Task</a></li>
-                                <li><a href="add-task.html" class="link-dark rounded task">Add Task</a></li>
+                                <li><a th:href="@{~/task/get-all}" class="link-dark rounded task">View Task</a></li>
+                                <li><a th:href="@{~/task/create}" class="link-dark rounded task">Add Task</a></li>
                             </ul>
                         </div>
                     </li>
@@ -52,7 +52,7 @@
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                 <li><a href="view-income.html" class="link-dark rounded task">Income</a></li>
                                 <li><a href="expenses.html" class="link-dark rounded task">Expenses</a></li>
-                                <li><a href="sources.html" class="link-dark rounded task">Sources</a></li>
+                                <li><a th:href="@{~/source/get-all}" class="link-dark rounded task">Sources</a></li>
                             </ul>
                         </div>
                     </li>

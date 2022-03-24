@@ -16,9 +16,9 @@
     <div th:replace="fragment/generics :: sidenavbar"></div>
     <div id="content" class="p-4 p-md-5 pt-5">
         <div id="btn-click">
-            <button class="cssbuttons-io-button">
-                <span><a class="link-all" href="add-task.html">Add Source</a></span>
-            </button>
+            <a class="link-all" th:href="@{~/source/create}"> <button class="cssbuttons-io-button">
+                <span>Add Source</span>
+            </button></a>
         </div>
         <div class="table-wrapper">
             <table class="fl-table">
@@ -37,7 +37,7 @@
                     <td th:text="*{source.description}" >Content 1</td>
 
                     <td>
-                        <button type="button" class="btn btn-success">Edit</button>
+                        <a th:href="@{~/source/edit/{id} (id= ${source.id}) }"> <button type="button" class="btn btn-success">Edit</button></a>
                     </td>
                 </tr>
 
