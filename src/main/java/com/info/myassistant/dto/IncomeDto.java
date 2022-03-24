@@ -33,6 +33,8 @@ public class IncomeDto {
     @NotNull(message = "Please select a source")
     private Integer sourceId;
 
+    private String sourceName;
+
     public IncomeDto(Income income) {
         this.incomeId = income.getIncomeId();
         this.amount = income.getAmount();

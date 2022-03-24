@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+    <title>Todo</title>
+</head>
+<body>
+<div th:replace="fragment/generics :: cdntestcss"></div>
+<div th:replace="fragment/generics :: cdntestjs"></div>
+<div class="wrapper d-flex align-items-stretch">
+    <div th:insert="fragment/generics :: sidenavbar"></div>
+    <div id="content2" class="p-4 p-md-3 pt-5">
+        <div class="add-task">
+            <h5>Add Income</h5>
+            <hr/>
+        </div>
+        <form class="form-data" th:method="post" th:object="${incomeDetails}" th:action="@{~/income/create}">
+            <div class="row item-row">
+                <input type="hidden" name="id" th:field="*{incomeId}">
+                <div class="col-md-3">
+                    <label th:for="inputSource" class="form-label fw-bold">Source</label>
+                    <!--                    <input type="text" class="form-control" name="source" />-->
+                    <br>
+                    <select th:field="*{sourceId}" class="custom-select">
+                        <option disabled selected>Select</option>
+                        <option th:each="source : ${sourcesDetails}"
+                                th:value="${source.id}"
+                                th:text="${source.source}"
+                        >
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="row item-row">
+                <div class="col-md-3 mt-4">
+                    <label th:for="inputNumber" class="form-label fw-bold">Amount</label>
+                    <input th:filed="*{amount}" type="number" class="form-control " name="amount"/>
+                </div>
+            </div>
+
+            <div class="row item-row mt-4">
+                <div class="col-md-3">
+                    <label th:for="inputAddress" class="form-label fw-bold">Description</label>
+                    <!-- <input type="password" class="form-control" name="remarks" /> -->
+                    <textarea th:filed="*{description}" class="input100 form-control" name="message"></textarea>
+                </div>
+            </div>
+
+            <div class="col-12 item-row mt-4">
+                <button type="submit" class="btn btn-primary  px-5 text-white">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

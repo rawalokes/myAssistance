@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+    <link rel="stylesheet" th:href="@{../css/style.css}">
+    <title>Todo</title>
+</head>
+<body>
+<div th:replace="fragment/generics :: cdntestcss"></div>
+<div th:replace="fragment/generics :: cdntestjs"></div>
+<div class="wrapper d-flex align-items-stretch">
+    <div th:replace="fragment/generics :: sidenavbar"></div>
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <div id="btn-click">
+            <button class="cssbuttons-io-button">
+                <span><a class="link-all" href="add-income.html">Add Income</a></span>
+            </button>
+        </div>
+        <div class="table-wrapper">
+            <table class="fl-table">
+                <thead>
+                <tr>
+                    <th>Source</th>
+                    <th>Amount</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr >
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-success">Edit</button>
+<!--                        <button type="button" class="btn btn-danger">Delete</button>-->
+                    </td>
+                </tr>
+
+                <tbody>
+            </table>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
