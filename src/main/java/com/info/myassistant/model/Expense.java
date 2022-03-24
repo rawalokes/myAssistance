@@ -1,5 +1,6 @@
 package com.info.myassistant.model;
 
+import com.info.myassistant.dto.ExpenseDto;
 import com.info.myassistant.enums.ExpenseType;
 import lombok.*;
 
@@ -30,4 +31,13 @@ public class Expense {
     @JoinColumn(name = "user_id",referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_user_expense"))
     private User user;
+
+    public Expense(ExpenseDto expenseDto) {
+        this.id = expenseDto.getId();
+        this.name = expenseDto.getName();
+        this.amount = expenseDto.getAmount();
+        this.expenseType = expenseDto.getExpenseType();
+        this.description = expenseDto.getDescription();
+
+    }
 }

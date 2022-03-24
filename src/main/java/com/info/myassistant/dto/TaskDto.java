@@ -26,7 +26,8 @@ public class TaskDto {
 
     @NotEmpty(message = "Name cannot be empty")
     @Size(min = 3, message = "Minimum three character required")
-    @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "Name cannot have special character number or whitespace")
+    @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "Name cannot have" +
+            " special character number or whitespace")
     private String name;
 
     private TaskStatus taskStatus;

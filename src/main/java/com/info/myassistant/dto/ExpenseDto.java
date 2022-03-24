@@ -1,7 +1,11 @@
 package com.info.myassistant.dto;
 
+import com.info.myassistant.enums.ExpenseType;
+import com.info.myassistant.model.Expense;
 import lombok.*;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
 
 /**
@@ -20,12 +24,24 @@ public class ExpenseDto {
     @Size(min = 3, message = "Minimum three character required")
     @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "Name cannot have special character number or whitespace")
     private String name;
+
     @NotNull(message = "Amount cannot be Empty")
     @Min(value = 1,message = "Amount cannot be less than zero")
     private Double amount;
-    @NotEmpty(message = "Expense type cannot be null")
-    private String expenseType;
+
+
+    private ExpenseType expenseType;
+
+    private Integer userId;
 
     private String description;
+    public ExpenseDto(Expense expense) {
+        this.id = expense.getId();
+        this.name = expense.getName();
+        this.amount = expense.getAmount();
+        this.expenseType = expense.getExpenseType();
+        this.description = expense.getDescription();
+
+    }
 
 }
