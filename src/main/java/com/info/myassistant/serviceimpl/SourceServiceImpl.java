@@ -6,6 +6,7 @@ import com.info.myassistant.model.Source;
 import com.info.myassistant.repo.SourceRepo;
 import com.info.myassistant.service.SourceService;
 import com.info.myassistant.shared.BaseResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
  * Date:3/24/22
  * Time:11:51 AM
  */
+@Service
 public class SourceServiceImpl extends BaseResponse implements SourceService {
     private final SourceRepo sourceRepo;
     public SourceServiceImpl(SourceRepo sourceRepo) {

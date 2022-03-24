@@ -21,13 +21,13 @@ public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "source_seq_gen")
     @SequenceGenerator(name = "source_seq_gen",sequenceName = "source_seq",allocationSize = 1)
-    private Integer id;
+    private Integer sourceId;
 
     private String source;
     private String description;
 
     public Source(SourceDto sourceDto) {
-        this.id = sourceDto.getId();
+        this.sourceId = sourceDto.getId();
         this.source=sourceDto.getSource();
         this.description = sourceDto.getDescription();
     }

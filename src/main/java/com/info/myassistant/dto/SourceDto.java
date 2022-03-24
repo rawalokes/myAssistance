@@ -21,12 +21,10 @@ public class SourceDto {
     @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "Source cannot be Empty")
     private String source;
 
-    @NotEmpty(message = "Description cannot be Empty")
-    @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "Description cannot be Empty")
     private String description;
 
     public SourceDto(Source source) {
-        this.id = source.getId();
+        this.id = source.getSourceId();
         this.source= source.getSource();
         this.description = source.getDescription();
     }

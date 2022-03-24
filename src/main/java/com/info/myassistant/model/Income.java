@@ -21,21 +21,20 @@ public class Income {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "income_seq_gen")
     @SequenceGenerator(name = "income_seq_gen",sequenceName = "income_seq",allocationSize = 1)
-    @Column(name = "income_Id")
     private Integer incomeId;
 
     private Double amount;
 
     private String description;
     @ManyToOne
-    @JoinColumn(name = "source_id",referencedColumnName = "income_Id",
-    foreignKey = @ForeignKey(name = "fk_income_source"))
+    @JoinColumn(name = "source_id",referencedColumnName = "sourceId",
+    foreignKey = @ForeignKey(name = "fk_source_income"))
     private Source source;
 
     @ManyToOne
-    @JoinColumn(name = "user_id",referencedColumnName = "income_Id",
-            foreignKey = @ForeignKey(name = "fk_income_user"))
-    private Income income;
+    @JoinColumn(name = "user_id",referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_user_income"))
+    private User user;
 
 
     public Income(IncomeDto incomeDto) {

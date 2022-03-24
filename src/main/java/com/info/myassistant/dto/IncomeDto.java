@@ -37,6 +37,6 @@ public class IncomeDto {
         this.incomeId = income.getIncomeId();
         this.amount = income.getAmount();
         this.description = income.getDescription();
-        this.sourceId = income.getSource().getId();
+        this.sourceId = income.getSource().getSourceId();
     }
 }

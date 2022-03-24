@@ -17,18 +17,20 @@
             <h5>Add Category</h5>
             <hr />
         </div>
-        <form class="form-data">
+        <form class="form-data" th:action="@{~/source/create}" th:method="post" th:object="${source}">
             <div class="row item-row">
                 <div class="col-md-3">
                     <label th:for="inputName" class="form-label fw-bold">Name</label>
-                    <input type="text" class="form-control " name="name" />
+                    <input th:field="*{source}" type="text" class="form-control " name="name" />
+                    <p th:if="${#fields.hasErrors('source')}" th:errorclass="error" th:errors="*{source}" />
                 </div>
             </div>
             <div class="row item-row mt-4">
                 <div class="col-md-3">
                     <label th:for="inputAddress" class="form-label fw-bold">Description</label>
-                    <!-- <input type="password" class="form-control" name="remarks" /> -->
-                    <textarea class="input100 form-control" name="message"></textarea>
+                    <textarea th:field="*{description}" class="input100 form-control" name="message"></textarea>
+                    <p th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}" />
+
                 </div>
             </div>
 
