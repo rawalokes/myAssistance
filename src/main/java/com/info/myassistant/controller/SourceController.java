@@ -1,8 +1,8 @@
 package com.info.myassistant.controller;
 
+import com.info.myassistant.dto.ResponseDto;
 import com.info.myassistant.dto.SourceDto;
 import com.info.myassistant.serviceimpl.SourceServiceImpl;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,7 +43,15 @@ public class SourceController {
         if (bindingResult.hasErrors()){
             return "source/createSource";
         }
-        return "redirect:/source/get-all";
+        ResponseDto responseDto= sourceService.create(sourceDto);
+        if (responseDto.isStatus()){
+            return "redirect:/source/get-all";
+        }
+        else{
+            model.addAttribute("errorMessage",responseDto.getMessage());
+            return "source/createSource";
+        }
+
 
     }
 
