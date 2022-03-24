@@ -30,9 +30,14 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
 
     @Override
     public ResponseDto create(IncomeDto incomeDto) {
-        Income income = converterIncomeDtoToIncome(incomeDto);
-        incomeRepo.save(income);
-        return successResponse("Income Saved Successfully", null);
+        try {
+            Income income = converterIncomeDtoToIncome(incomeDto);
+            incomeRepo.save(income);
+            return successResponse("Income Saved Successfully", null);
+        }catch (NumberFormatException e){
+          return errorResponse("Please enter numbers",null);
+        }
+
     }
 
     @Override

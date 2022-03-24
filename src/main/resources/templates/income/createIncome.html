@@ -40,6 +40,11 @@
                     <input th:filed="*{amount}" type="number" class="form-control "
                            name="amount"/>
                     <p th:if="${#fields.hasErrors('amount')}" th:errorclass="error" th:errors="*{amount}" />
+                    <div th:if="${errorMessage}">
+                        <p  th:errorclass="error" th:text="*{message}" />
+                    </div>
+
+
                 </div>
             </div>
 
