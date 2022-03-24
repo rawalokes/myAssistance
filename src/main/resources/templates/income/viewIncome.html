@@ -16,14 +16,16 @@
     <div th:replace="fragment/generics :: sidenavbar"></div>
     <div id="content" class="p-4 p-md-5 pt-5">
         <div id="btn-click">
+            <a class="link-all" th:href="@{~/income/create}">
             <button class="cssbuttons-io-button">
-                <span><a class="link-all" href="add-income.html">Add Income</a></span>
-            </button>
+                <span>Add Income</span>
+            </button></a>
         </div>
         <div class="table-wrapper">
             <table class="fl-table">
                 <thead>
                 <tr>
+                    <th>SN</th>
                     <th>Source</th>
                     <th>Amount</th>
                     <th>Description</th>
@@ -31,11 +33,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr >
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr th:each="income ,index : ${incomeList} ">
+                    <td th:text="${index.count}" ></td>
+                    <td th:text="${income.sourceName}" ></td>
+                    <td th:text="${income.amount}"></td>
+                    <td th:text="${income.description}"></td>
                     <td>
                         <button type="button" class="btn btn-success">Edit</button>
 <!--                        <button type="button" class="btn btn-danger">Delete</button>-->

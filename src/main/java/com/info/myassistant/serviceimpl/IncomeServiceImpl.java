@@ -10,6 +10,8 @@ import com.info.myassistant.shared.BaseResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author rawalokes
@@ -28,19 +30,43 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
 
     @Override
     public ResponseDto create(IncomeDto incomeDto) {
-        Income income =new Income(incomeDto);
+        Income income = converterIncomeDtoToIncome(incomeDto);
         incomeRepo.save(income);
-        return successResponse("Income Saved Successfully",null);
+        return successResponse("Income Saved Successfully", null);
     }
 
     @Override
     public ResponseDto findByID(Integer integer) {
-        return null;
+        Optional<Income> income= incomeRepo.findById(integer);
+        if (income.isPresent()){
+            return successResponse("",income);
+        }
+        return errorResponse("Income not found",null);
     }
 
     @Override
     public List<IncomeDto> findAll() {
+        List<Income> incomes = incomeRepo.findAll();
+        return incomes.stream().map(income -> converterIncomeToIncomeDto(income) )
+                .collect(Collectors.toList());
+    }
 
-        return null;
+    private IncomeDto converterIncomeToIncomeDto(Income income) {
+        return IncomeDto.builder()
+                .incomeId(income.getIncomeId())
+                .amount(income.getAmount())
+                .description(income.getDescription())
+                .sourceName(sourceRepo.findById(income
+                                .getSource().getSourceId())
+                        .get().getSourceName())
+                .build();
+    }
+    private Income converterIncomeDtoToIncome(IncomeDto incomeDto) {
+        return Income.builder()
+                .incomeId(incomeDto.getIncomeId())
+                .amount(incomeDto.getAmount())
+                .description(incomeDto.getDescription())
+                .source(sourceRepo.findById(incomeDto.getSourceId()).get())
+                .build();
     }
 }

@@ -19,13 +19,13 @@ public class SourceDto {
     private Integer id;
     @NotEmpty(message = "Source cannot be Empty")
     @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "Source cannot be Empty")
-    private String source;
+    private String sourceName;
 
     private String description;
 
     public SourceDto(Source source) {
         this.id = source.getSourceId();
-        this.source= source.getSource();
+        this.sourceName= source.getSourceName();
         this.description = source.getDescription();
     }
 }

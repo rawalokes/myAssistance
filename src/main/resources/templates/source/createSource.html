@@ -22,8 +22,8 @@
                 <input type="hidden" name="id" th:field="*{id}">
                 <div class="col-md-3">
                     <label th:for="inputName" class="form-label fw-bold">Name</label>
-                    <input th:field="*{source}" type="text" class="form-control " name="name" />
-                    <p th:if="${#fields.hasErrors('source')}" th:errorclass="error" th:errors="*{source}" />
+                    <input th:field="*{sourceName}" type="text" class="form-control " name="name" />
+                    <p th:if="${#fields.hasErrors('sourceName')}" th:errorclass="error" th:errors="*{sourceName}" />
                 </div>
             </div>
             <div class="row item-row mt-4">

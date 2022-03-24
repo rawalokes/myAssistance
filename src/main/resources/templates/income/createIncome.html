@@ -25,10 +25,10 @@
                     <!--                    <input type="text" class="form-control" name="source" />-->
                     <br>
                     <select th:field="*{sourceId}" class="custom-select">
-                        <option disabled selected>Select</option>
+                        <option th:value="0" disabled selected>Select</option>
                         <option th:each="source : ${sourcesDetails}"
                                 th:value="${source.id}"
-                                th:text="${source.source}"
+                                th:text="${source.sourceName}"
                         >
                         </option>
                     </select>
@@ -37,7 +37,9 @@
             <div class="row item-row">
                 <div class="col-md-3 mt-4">
                     <label th:for="inputNumber" class="form-label fw-bold">Amount</label>
-                    <input th:filed="*{amount}" type="number" class="form-control " name="amount"/>
+                    <input th:filed="*{amount}" type="number" class="form-control "
+                           name="amount"/>
+                    <p th:if="${#fields.hasErrors('amount')}" th:errorclass="error" th:errors="*{amount}" />
                 </div>
             </div>
 
@@ -45,7 +47,10 @@
                 <div class="col-md-3">
                     <label th:for="inputAddress" class="form-label fw-bold">Description</label>
                     <!-- <input type="password" class="form-control" name="remarks" /> -->
-                    <textarea th:filed="*{description}" class="input100 form-control" name="message"></textarea>
+                    <textarea th:filed="*{description}" class="input100 form-control"
+                              name="description"></textarea>
+                    <p th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}" />
+
                 </div>
             </div>
 

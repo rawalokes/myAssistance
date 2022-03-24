@@ -42,5 +42,6 @@ public class Income {
         this.amount = incomeDto.getAmount();
         this.description=incomeDto.getDescription();
 
+
     }
 }

@@ -23,12 +23,12 @@ public class Source {
     @SequenceGenerator(name = "source_seq_gen",sequenceName = "source_seq",allocationSize = 1)
     private Integer sourceId;
 
-    private String source;
+    private String sourceName;
     private String description;
 
     public Source(SourceDto sourceDto) {
         this.sourceId = sourceDto.getId();
-        this.source=sourceDto.getSource();
+        this.sourceName =sourceDto.getSourceName();
         this.description = sourceDto.getDescription();
     }
 }
