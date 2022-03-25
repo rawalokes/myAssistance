@@ -30,11 +30,11 @@
 <div th:fragment="sidenavbar">
         <nav id="sidebar" class="">
             <div class="p-4 pt-5 nav-height" >
-                <h1><a href="index.html" class="logo">Assistant</a></h1>
+                <h1><a th:href="@{~/}" class="logo">Assistant</a></h1>
 
                 <ul class="list-unstyled components mb-5">
                     <li>
-                        <button class="btn btn-toggle align-items-center rounded collapsed"><a class="link-all" href="weather.html">Weather</a></button>
+                        <button class="btn btn-toggle align-items-center rounded collapsed"><a class="link-all" th:href="@{~/}">Weather</a></button>
                     </li>
                     <li>
                         <button class="btn btn-toggle align-items-center rounded collapsed dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"><a class="link-all" href="todo.html">Todo</a></button>
@@ -50,8 +50,8 @@
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false"><a id="active" class="link-all" href="account.html">Account</a></button>
                         <div class="collapse" id="account-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a href="view-income.html" class="link-dark rounded task">Income</a></li>
-                                <li><a href="expenses.html" class="link-dark rounded task">Expenses</a></li>
+                                <li><a th:href="@{~/income/get-all}" class="link-dark rounded task">Income</a></li>
+                                <li><a th:href="@{~/expense/get-all}" class="link-dark rounded task">Expenses</a></li>
                                 <li><a th:href="@{~/source/get-all}" class="link-dark rounded task">Sources</a></li>
                             </ul>
                         </div>

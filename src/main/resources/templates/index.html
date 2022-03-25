@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>login</title>
+</head>
+<body>
+<div th:replace="fragment/generics :: cdntestcss"></div>
+<div th:replace="fragment/generics :: cdntestjs"></div>
+<div class="wrapper d-flex align-items-stretch">
+    <div th:insert="fragment/generics :: sidenavbar"></div>
+    <div id="content" class="p-4 p-md-5 pt-5">
+        <div id="btn-click">
+            <a class="link-all marginalButton " th:href="@{~/users/login}">
+                <button class="cssbuttons-io-button">
+                    <span>Sing In</span>
+                </button>
+            </a>
+            <a class="link-all marginalButton" th:href="@{~/users/create}">
+                <button class="cssbuttons-io-button">
+                    <span>Sing Up</span>
+                </button>
+            </a>
+
+        </div>
+        <div id="bg-image"></div>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-4 col-sm-12 col-xs-12">
+                    <div class="card p-4">
+                        <div class="search-form">
+                            <div class="form-inline">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <input value="kathmandu" type="text"
+                                           class="form-control" id="input_text"
+                                           placeholder="Enter City">
+                                    </input>
+                                </div>
+                                <input type="submit"
+                                       class="submit btn btn-primary mb-2">
+
+                                </input>
+                            </div>
+                        </div>
+
+                        <div class="d-flex">
+                            <h4 id="name" class="flex-grow-1"></h4>
+
+                        </div>
+                        <div class="d-flex flex-column mb-3">
+                            <h2 class="temp mb-0 font-weight-bold" id="heading">  </h2>
+
+                            <p class="desc "><span class="desc small grey"></span></p>
+                        </div>
+                        <div class="temp-details flex-grow-1">
+                            <p class="speed my-1">
+                                <span>  </span></p>
+
+
+                        </div>
+
+
+<!--                        <div class="d-flex">-->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/weather.js}">
+
+</script>
+</body>
+</html>

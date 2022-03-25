@@ -23,14 +23,14 @@
                 <div class="col-md-3">
                     <label th:for="inputName" class="form-label fw-bold">Name</label>
                     <input th:field="*{sourceName}" type="text" class="form-control " name="name" />
-                    <p th:if="${#fields.hasErrors('sourceName')}" th:errorclass="error" th:errors="*{sourceName}" />
+                    <p class="fieldError" th:if="${#fields.hasErrors('sourceName')}" th:errorclass="error" th:errors="*{sourceName}" />
                 </div>
             </div>
             <div class="row item-row mt-4">
                 <div class="col-md-3">
                     <label th:for="inputAddress" class="form-label fw-bold">Description</label>
                     <textarea th:field="*{description}" class="input100 form-control" name="message"></textarea>
-                    <p th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}" />
+                    <p class="fieldError" th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}" />
 
                 </div>
             </div>

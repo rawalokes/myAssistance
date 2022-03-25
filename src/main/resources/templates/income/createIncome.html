@@ -39,9 +39,9 @@
                     <label th:for="inputNumber" class="form-label fw-bold">Amount</label>
                     <input th:filed="*{amount}" type="number" class="form-control "
                            name="amount"/>
-                    <p th:if="${#fields.hasErrors('amount')}" th:errorclass="error" th:errors="*{amount}" />
+                    <p class="fieldError" th:if="${#fields.hasErrors('amount')}" th:errorclass="error" th:errors="*{amount}" />
                     <div th:if="${errorMessage}">
-                        <p  th:errorclass="error" th:text="*{message}" />
+                        <p  class="fieldError" th:errorclass="error" th:text="*{message}" />
                     </div>
 
 
@@ -51,10 +51,9 @@
             <div class="row item-row mt-4">
                 <div class="col-md-3">
                     <label th:for="inputAddress" class="form-label fw-bold">Description</label>
-                    <!-- <input type="password" class="form-control" name="remarks" /> -->
                     <textarea th:filed="*{description}" class="input100 form-control"
                               name="description"></textarea>
-                    <p th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}" />
+                    <p class="fieldError" th:if="${#fields.hasErrors('description')}" th:errorclass="error" th:errors="*{description}" />
 
                 </div>
             </div>

@@ -28,6 +28,7 @@ public class UserDto {
     private String name;
 
     @Email(message = "Invalid email")
+    @NotEmpty(message = "Email cannot be null")
     private String email;
 
     @Size(min = 8,message = "Password must of minimum 8 character")

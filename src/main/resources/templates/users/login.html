@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" th:href="@{../../css/style.css}">
+    <title>login</title>
+</head>
+<body>
+<div th:replace="fragment/generics :: cdntestcss"></div>
+<div th:replace="fragment/generics :: cdntestjs"></div>
+<div class="wrapper d-flex align-items-stretch">
+    <div th:insert="fragment/generics :: sidenavbar" ></div>
+    <div id="content" class="p-4 p-md-5 pt-5 in-center">
+        <div class="add-task">
+            <h5>Login</h5>
+            <hr />
+        </div>
+        <div class="contain">
+            <div class="form-box">
+                <form>
+                    <div class="row mt-4">
+                        <div class="col-md-12 mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="col-md-12 signup">
+                        <p class="signup-text">New here? <a class="link-info" href="signup.html">Register Now</a></p>
+                    </div>
+                    <div class="btn-submit">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

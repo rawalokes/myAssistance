@@ -6,6 +6,7 @@ import com.info.myassistant.model.User;
 import com.info.myassistant.repo.UserRepo;
 import com.info.myassistant.service.UserService;
 import com.info.myassistant.shared.BaseResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
  * Date:3/22/22
  * Time:4:58 PM
  */
+@Service
 public class UserServiceImpl extends BaseResponse implements UserService {
     private final UserRepo userRepo;
 
@@ -26,7 +28,6 @@ public class UserServiceImpl extends BaseResponse implements UserService {
         try {
             //convert user into UserDto
             User user= new User(userDto);
-
 
             return successResponse("User Register Successfully",null);
         }catch (Exception e){

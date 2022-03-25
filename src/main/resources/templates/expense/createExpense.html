@@ -27,7 +27,9 @@
             <div class="row item-row">
                 <div class="col-md-3 mt-4">
                     <label th:for="inputNumber" class="form-label fw-bold">Amount</label>
-                    <input th:field="*{amount}" type="number" class="form-control " name="amount" />
+                    <input  th:field="*{amount}" type="number" class="form-control " name="amount" />
+                    <p class="fieldError" th:if="${#fields.hasErrors('amount')}" th:errorclass="error" th:errors="*{amount}" />
+
                 </div>
             </div>
 <!--            <div th:each="model : *{expenseType.values()}">-->
@@ -43,6 +45,8 @@
                     <label th:for="inputAddress" class="form-label fw-bold">Description</label>
                     <!-- <input type="password" class="form-control" name="remarks" /> -->
                     <textarea th:field="*{description}" class="input100 form-control" name="message"></textarea>
+                    <p class="fieldError" th:if="${#fields.hasErrors('amount')}" th:errorclass="error" th:errors="*{amount}" />
+
                 </div>
             </div>
 
