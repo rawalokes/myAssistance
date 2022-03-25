@@ -6,6 +6,8 @@ import com.info.myassistant.model.User;
 import com.info.myassistant.repo.UserRepo;
 import com.info.myassistant.service.UserService;
 import com.info.myassistant.shared.BaseResponse;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -45,6 +47,15 @@ public class UserServiceImpl extends BaseResponse implements UserService {
             return errorResponse("User Not Found",null);
         }
 
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepo.findByEmail(username);
+        if(user == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(),user.getPassword());
     }
 
 }
