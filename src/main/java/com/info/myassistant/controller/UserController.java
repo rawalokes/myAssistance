@@ -41,6 +41,7 @@ public class UserController {
             return "users/createUser";
         }
         if (responseDto.isStatus()) {
+
             return "users/login";
         } else {
             model.addAttribute("errorMessage", responseDto.getMessage());
