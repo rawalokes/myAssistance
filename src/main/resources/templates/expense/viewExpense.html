@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -18,7 +19,13 @@
                 <button class="cssbuttons-io-button">
                 <span>Add Expenses</span>
             </button></a>
+
+            <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">
+                <button class="cssbuttons-io-button">
+                    <span>Add Expenses</span>
+                </button></a>
         </div>
+
         <div class="table-wrapper">
             <table class="fl-table">
                 <thead>

@@ -34,7 +34,7 @@ public class Income {
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_user_income"))
-    private User user;
+    private Users users;
 
 
     public Income(IncomeDto incomeDto) {

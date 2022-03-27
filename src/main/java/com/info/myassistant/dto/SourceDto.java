@@ -23,9 +23,12 @@ public class SourceDto {
 
     private String description;
 
+    private boolean deleteStatus;
+
     public SourceDto(Source source) {
         this.id = source.getSourceId();
         this.sourceName= source.getSourceName();
         this.description = source.getDescription();
+        this.deleteStatus=source.isDeleteStatus();
     }
 }

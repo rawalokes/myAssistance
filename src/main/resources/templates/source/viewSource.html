@@ -21,6 +21,11 @@
             </button></a>
         </div>
         <div class="table-wrapper">
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    Source deleted successfully.
+                </div>
+            </div>
             <table class="fl-table">
                 <thead>
                 <tr>
@@ -32,12 +37,13 @@
                 </thead>
                 <tbody>
                 <tr th:each="source,index : ${sourceList} " >
-                    <td th:text="*{index.count}">Content 1</td>
-                    <td th:text="*{source.sourceName}" >Content 1</td>
-                    <td th:text="*{source.description}" >Content 1</td>
+                    <td th:text="*{index.count}"></td>
+                    <td th:text="*{source.sourceName}" ></td>
+                    <td th:text="*{source.description}" >1</td>
 
                     <td>
                         <a th:href="@{~/source/edit/{id} (id= ${source.id}) }"> <button type="button" class="btn btn-success">Edit</button></a>
+                        <a th:href="@{~/source/remove/{id} (id= ${source.id}) }"> <button type="button" class="btn btn-success">Delete</button></a>
                     </td>
                 </tr>
 

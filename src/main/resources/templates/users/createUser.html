@@ -17,13 +17,26 @@
             <h5>Register</h5>
             <hr />
         </div>
+
         <div class="contain">
             <div class="form-box">
-                <form  th:object="${userDetails}" th:method="post" th:action="@{~/users/create}">
+<!--                user created successfully message-->
+
+                <form  th:object="${userDetails}" th:method="post" th:action="@{~/register}">
+                    <div th:if="${param.created}">
+                        <div class="alert alert-success">
+                            User created successfully please check your email for password.
+                            <p>click me to <a th:href="@{~/login}">Sign In</button></a></p>
+                        </div>
+                    </div>
                     <div class="row mt-4">
                         <div class="col-md-12 mb-3">
                             <label for="exampleFullName" class="form-label">Full Name</label>
-                            <input th:field="*{name}" type="text" class="form-control" id="exampleFullName" aria-describedby="fullName">
+                            <input th:field="*{name}" type="text"
+                                   class="form-control"
+                                   id="exampleFullName"
+                                   aria-describedby="fullName"
+                                   autofocus="autofocus">
                             <p class="fieldError" th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}" />
                         </div>
                     </div>
@@ -32,13 +45,19 @@
                             <label for="exampleInputEmail1" class="form-label">Email</label>
                             <input th:field="*{email}" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                             <p class="fieldError" th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}" />
+                            <div class="fieldError" th:if="${errorMessage}">
+                                <p th:text="${errorMessage}" ></p>
+                            </div>
                             <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                         </div>
                     </div>
-                    <div class="col-md-12 mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input th:field="*{password}" type="password" class="form-control" id="exampleInputPassword1">
-                        <p class="fieldError" th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}" />
+<!--                    <div class="col-md-12 mb-3">-->
+<!--                        <label for="exampleInputPassword1" class="form-label">Password</label>-->
+<!--                        <input th:field="*{password}" type="password" class="form-control" id="exampleInputPassword1">-->
+<!--                        <p class="fieldError" th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}" />-->
+<!--                    </div>-->
+                    <div class="col-md-12 signup">
+                        <p class="signup-text">Already have an account? <a class="link-info" th:href="@{~/login}">Sign In</a></p>
                     </div>
                     <div class="btn-submit mt-2">
                         <button type="submit" class="btn btn-primary">Register</button>

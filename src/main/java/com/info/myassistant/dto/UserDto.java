@@ -1,7 +1,8 @@
 package com.info.myassistant.dto;
 
-import com.info.myassistant.model.User;
+import com.info.myassistant.model.Users;
 import lombok.*;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -29,18 +30,22 @@ public class UserDto {
 
     @Email(message = "Invalid email")
     @NotEmpty(message = "Email cannot be null")
+
     private String email;
 
-    @Size(min = 8,message = "Password must of minimum 8 character")
-    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$",message = "Password must consist of one uppercase , lowercase ,special character and number")
+//    @Size(min = 8,message = "Password must of minimum 8 character")
+//    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$",message = "Password must consist of one uppercase , lowercase ,special character and number")
     private String password;
 
+    private String role;
 
-    public UserDto(User user) {
-        this.userId = user.getId();
-        this.name = user.getName();
-        this.email = user.getEmail();
-        this.password = user.getPassword();
+
+    public UserDto(Users users) {
+        this.userId = users.getId();
+        this.name = users.getName();
+        this.email = users.getEmail();
+        this.password = users.getPassword();
+//        this.role=user.getRole();
     }
 }
 

@@ -22,7 +22,8 @@
             <input type="hidden" name="id" th:field="*{taskId}">
             <div class="col-md-3">
                 <label th:for="inputName" class="form-label fw-bold">Name</label>
-                <input th:field="*{name}" type="text" class="form-control " name="name" />
+                <input th:field="*{name}" type="text" class="form-control " name="name"
+                       autofocus="autofocus"/>
                 <p class="fieldError" th:if="${#fields.hasErrors('name')}" th:errorclass="error" th:errors="*{name}" />
             </div>
 

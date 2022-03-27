@@ -19,7 +19,6 @@ import javax.validation.Valid;
  * Time:6:51 AM
  */
 @Controller
-@RequestMapping("/users")
 public class UserController {
     private final UserServiceImpl userService;
 
@@ -27,22 +26,26 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/create")
+    @GetMapping("/login")
+    public String userLogin() {
+        return "users/login";
+    }
+
+    @GetMapping("/register")
     public String getCreateUSer(Model model) {
         model.addAttribute("userDetails", new UserDto());
         return "users/createUser";
     }
 
-    @PostMapping("/create")
+    @PostMapping("/register")
     public String postCreateUser(@Valid @ModelAttribute("userDetails") UserDto userDto
             , BindingResult bindingResult, Model model) {
         ResponseDto responseDto = userService.create(userDto);
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "users/createUser";
         }
         if (responseDto.isStatus()) {
-
-            return "users/login";
+            return "redirect:/register?created";
         } else {
             model.addAttribute("errorMessage", responseDto.getMessage());
             return "users/createUser";

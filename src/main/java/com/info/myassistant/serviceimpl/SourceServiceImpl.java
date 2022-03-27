@@ -6,6 +6,7 @@ import com.info.myassistant.model.Source;
 import com.info.myassistant.repo.SourceRepo;
 import com.info.myassistant.service.SourceService;
 import com.info.myassistant.shared.BaseResponse;
+import com.info.myassistant.utility.GetCurrentUserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,15 +21,18 @@ import java.util.stream.Collectors;
 @Service
 public class SourceServiceImpl extends BaseResponse implements SourceService {
     private final SourceRepo sourceRepo;
+    private final GetCurrentUserDetails currentUserDetails;
 
-    public SourceServiceImpl(SourceRepo sourceRepo) {
+    public SourceServiceImpl(SourceRepo sourceRepo, GetCurrentUserDetails currentUserDetails) {
         this.sourceRepo = sourceRepo;
+        this.currentUserDetails = currentUserDetails;
     }
 
     @Override
     public ResponseDto create(SourceDto sourceDto) {
         if (sourceDto != null) {
             Source source = new Source(sourceDto);
+            source.setUsers(currentUserDetails.getCurrentUser());
             sourceRepo.save(source);
             return successResponse("Source added successfully", null);
         }
@@ -47,7 +51,23 @@ public class SourceServiceImpl extends BaseResponse implements SourceService {
 
     @Override
     public List<SourceDto> findAllSource() {
-        List<Source> sources = sourceRepo.findAll();
-        return sources.stream().map(source -> new SourceDto(source)).collect(Collectors.toList());
+        List<Source> sources = sourceRepo.findAllSource(currentUserDetails
+                .getCurrentUser(),false);
+        return sources.stream().map(source -> new SourceDto(source))
+                .collect(Collectors.toList());
     }
+
+    @Override
+    public ResponseDto removeSource(Integer integer) {
+        Optional<Source> source=sourceRepo.findById(integer);
+        if (source.isPresent()){
+            Source databaseSource= source.get();
+            databaseSource.setDeleteStatus(true);
+            sourceRepo.save(databaseSource);
+            return successResponse("Source deleted successfully",null);
+        }
+        return errorResponse("Source not found",null);
+    }
+
+
 }

@@ -4,9 +4,13 @@ import com.info.myassistant.dto.ResponseDto;
 import com.info.myassistant.dto.TaskDto;
 import com.info.myassistant.enums.TaskStatus;
 import com.info.myassistant.model.Task;
+import com.info.myassistant.model.Users;
 import com.info.myassistant.repo.TaskRepo;
+import com.info.myassistant.repo.UserRepo;
 import com.info.myassistant.service.TaskService;
 import com.info.myassistant.shared.BaseResponse;
+import com.info.myassistant.utility.GetCurrentUserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,10 +26,12 @@ import java.util.stream.Collectors;
 @Service
 public class TaskServiceImpl extends BaseResponse implements TaskService {
 
-    private final TaskRepo taskRepo;
+    private  final TaskRepo taskRepo;
+    private final GetCurrentUserDetails currentUser;
 
-    public TaskServiceImpl(TaskRepo taskRepo) {
+    public TaskServiceImpl(TaskRepo taskRepo, GetCurrentUserDetails currentUser) {
         this.taskRepo = taskRepo;
+        this.currentUser = currentUser;
     }
 
     //create a new task in database
@@ -35,6 +41,7 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
             taskDto.setTaskStatus(TaskStatus.pending);
             //convert task into taskDto
             Task task = new Task(taskDto);
+            task.setUsers(currentUser.getCurrentUser());
             taskRepo.save(task);
             return successResponse("Task Added successfully", null);
         } catch (Exception e) {
@@ -61,10 +68,9 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
 
     }
 
-
     @Override
     public List<TaskDto> showCurrentPendingTask() {
-        List<Task> tasks = taskRepo.findAllCurrentTask(TaskStatus.pending,LocalDate.now());
+        List<Task> tasks = taskRepo.findAllCurrentTask(TaskStatus.pending,LocalDate.now(),currentUser.getCurrentUser());
         return tasks.stream().map(task -> new TaskDto(task)).collect(Collectors.toList());
     }
 
@@ -77,7 +83,7 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
     @Override
     public List<TaskDto> yesterdayTask() {
         LocalDate yesterday= LocalDate.now().minusDays(1);
-        List<Task> yesterdayTask= taskRepo.findYesterdayByDate(yesterday,TaskStatus.pending);
+        List<Task> yesterdayTask= taskRepo.findYesterdayByDate(yesterday,TaskStatus.pending,currentUser.getCurrentUser());
         return yesterdayTask.stream().map(task -> new TaskDto(task)).collect(Collectors.toList());
     }
 
@@ -96,7 +102,7 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
 
     @Override
     public ResponseDto findByDate(LocalDate date) {
-        List<Task> tasks = taskRepo.findTaskByDate(LocalDate.now());
+        List<Task> tasks = taskRepo.findTaskByDate(LocalDate.now(),currentUser.getCurrentUser());
         if (tasks != null)
             return successResponse("", tasks);
         else

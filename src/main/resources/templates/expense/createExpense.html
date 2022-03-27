@@ -21,7 +21,9 @@
             <div class="row item-row">
                 <div class="col-md-3">
                     <label th:for="inputName" class="form-label fw-bold">Name</label>
-                    <input th:field="*{name}" type="text" class="form-control " name="name" />
+                    <input th:field="*{name}" type="text" class="form-control "
+                           name="name"
+                           autofocus="autofocus"/>
                 </div>
             </div>
             <div class="row item-row">
@@ -32,14 +34,7 @@
 
                 </div>
             </div>
-<!--            <div th:each="model : *{expenseType.values()}">-->
-<!--                <div class="custom-control custom-radio custom-control-inline">-->
-<!--                        <input type="radio" th:field="*{expenseType}" th:value="${model}"-->
-<!--                               class="custom-control-input">-->
-<!--                    <label class="custom-control-label"-->
-<!--                            th:text="${model}">model</label>-->
-<!--                </div>-->
-<!--            </div>-->
+
             <div class="row item-row mt-4">
                 <div class="col-md-3">
                     <label th:for="inputAddress" class="form-label fw-bold">Description</label>

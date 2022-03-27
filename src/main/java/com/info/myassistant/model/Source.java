@@ -25,10 +25,18 @@ public class Source {
 
     private String sourceName;
     private String description;
+    private boolean deleteStatus;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "fk_user_source"))
+    private Users users;
 
     public Source(SourceDto sourceDto) {
         this.sourceId = sourceDto.getId();
         this.sourceName =sourceDto.getSourceName();
         this.description = sourceDto.getDescription();
+        //by default delete status is set to false
+        this.deleteStatus=false;
     }
 }

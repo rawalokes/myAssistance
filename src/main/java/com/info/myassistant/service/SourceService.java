@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface SourceService extends GenericService<SourceDto,Integer> {
     List<SourceDto> findAllSource();
+    ResponseDto removeSource(Integer integer);
 }

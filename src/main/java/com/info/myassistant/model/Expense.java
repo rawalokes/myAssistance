@@ -30,7 +30,7 @@ public class Expense {
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_user_expense"))
-    private User user;
+    private Users users;
 
     public Expense(ExpenseDto expenseDto) {
         this.id = expenseDto.getId();

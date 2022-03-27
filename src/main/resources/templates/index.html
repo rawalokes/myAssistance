@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -15,13 +16,18 @@
 <div class="wrapper d-flex align-items-stretch">
     <div th:insert="fragment/generics :: sidenavbar"></div>
     <div id="content" class="p-4 p-md-5 pt-5">
+        <div>
+<!--            <span sec:authentication="principal.username">User</span>-->
+        </div>
+
+
         <div id="btn-click">
-            <a class="link-all marginalButton " th:href="@{~/users/login}">
+            <a class="link-all marginalButton " th:href="@{~/login}">
                 <button class="cssbuttons-io-button">
                     <span>Sing In</span>
                 </button>
             </a>
-            <a class="link-all marginalButton" th:href="@{~/users/create}">
+            <a class="link-all marginalButton" th:href="@{~/register}">
                 <button class="cssbuttons-io-button">
                     <span>Sing Up</span>
                 </button>

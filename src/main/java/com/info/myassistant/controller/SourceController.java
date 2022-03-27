@@ -64,4 +64,15 @@ public class SourceController {
             return "source/viewSource";
         }
     }
+    @GetMapping("/remove/{id}")
+    public String removeSource(@PathVariable("id") Integer id, Model model) {
+        ResponseDto responseDto = sourceService.removeSource(id);
+        if (responseDto.isStatus()) {
+            model.addAttribute("SourceDetails", responseDto.getData());
+            return "redirect:/source/get-all?success";
+        } else {
+            model.addAttribute("errorMessage", responseDto.getMessage());
+            return "source/viewSource";
+        }
+    }
 }

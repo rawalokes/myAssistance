@@ -22,7 +22,9 @@
                 <input type="hidden" name="id" th:field="*{id}">
                 <div class="col-md-3">
                     <label th:for="inputName" class="form-label fw-bold">Name</label>
-                    <input th:field="*{sourceName}" type="text" class="form-control " name="name" />
+                    <input th:field="*{sourceName}" type="text" class="form-control "
+                           name="name"
+                           autofocus="autofocus"/>
                     <p class="fieldError" th:if="${#fields.hasErrors('sourceName')}" th:errorclass="error" th:errors="*{sourceName}" />
                 </div>
             </div>
