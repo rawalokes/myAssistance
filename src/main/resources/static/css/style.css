@@ -144,6 +144,7 @@ th {
 .link-all {
     color: #fff;
     text-decoration: none;
+    margin-right: 10px;
 }
 
 .link-all:hover {
@@ -1155,7 +1156,25 @@ th {
     margin-bottom: 30px;
 }
 
+.fw-bold{
+    font-size: 12px;
+}
+
+#totalExpense{
+    font-size: 12px;
+}
+
+#remainingIncome{
+    font-size: 12px;
+}
+
+.top-btn{
+    margin-right: 10px;
+}
+
+
 .cssbuttons-io-button {
+    font-size: 10px;
     display: flex;
     align-items: center;
     font-family: inherit;

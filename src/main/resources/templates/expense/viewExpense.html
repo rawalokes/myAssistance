@@ -15,23 +15,26 @@
     <div th:replace="fragment/generics :: sidenavbar"></div>
     <div id="content" class="p-4 p-md-5 pt-5">
         <div id="btn-click">
+            <div class="top-btn">
+                <label th:for="totalExpense" class="form-label fw-bold">Total Expense</label>
+                <input id="totalExpense" class="totalExpense" th:placeholder="0.00" th:value="${totalExpense}" type="text" readonly>
+            </div>
+            <div class="top-btn">
+            <label th:for="remainingIncome" class="form-label fw-bold">Remaining Income</label>
+            <input id="remainingIncome" class="totalExpense" th:placeholder="0.00" th:value="${remainingIncome}" type="text" readonly>
+            </div>
             <a class="link-all" th:href="@{~/expense/create}">
                 <button class="cssbuttons-io-button">
                     <span>Add Expenses</span>
                 </button>
             </a>
 
-            <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">
-                <button class="cssbuttons-io-button">
-                    <span>log out</span>
-                </button>
-            </a>
-            <div>
-                <label th:for="totalExpense" class="form-label fw-bold">Total Expense</label>
-                <input id="totalExpense" class="totalExpense" th:placeholder="0.00" th:value="${totalExpense}" type="text" readonly>
-                <label th:for="remainingIncome" class="form-label fw-bold">Remaining Income</label>
-                <input id="remainingIncome" class="totalExpense" th:placeholder="0.00" th:value="${remainingIncome}" type="text" readonly>
-            </div>
+    <!--            <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">-->
+    <!--                <button class="cssbuttons-io-button">-->
+    <!--                    <span>log out</span>-->
+    <!--                </button>-->
+    <!--            </a>-->
+
         </div>
 
 
