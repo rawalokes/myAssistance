@@ -958,6 +958,11 @@ h5 {
     text-decoration: none;
 }
 
+.logo{
+    font-size: 40px;
+    font-weight: bold;
+}
+
 #sidebar ul.components {
     padding: 0;
 }

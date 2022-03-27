@@ -30,7 +30,13 @@
 <div th:fragment="sidenavbar">
         <nav id="sidebar" class="">
             <div class="p-4 pt-5 nav-height" >
-                <h1><a th:href="@{~/}" class="logo">Assistant</a></h1>
+                <h1><button class="btn btn-toggle align-items-center rounded collapsed dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dash-collapse" aria-expanded="false"><a th:href="@{~/}" class="logo">Assistant</a></button>
+                    <div class="collapse" id="dash-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a th:href="@{~/task/get-all}" class="link-dark rounded task">Profile</a></li>
+                            <li><a th:href="@{~/task/create}" class="link-dark rounded task">Sign Out</a></li>
+                        </ul>
+                    </div></a></h1>
 
                 <ul class="list-unstyled components mb-5">
                     <li>
