@@ -12,4 +12,6 @@ import java.util.List;
 public interface ExpenseRepo extends JpaRepository<Expense,Integer> {
     @Query("SELECT e FROM Expense e WHERE   e.users=?1")
     List<Expense> findAllExpense(Users users);
+    @Query("SELECT  SUM (e.amount) from Expense e WHERE e.users=?1")
+    Double findTotalExpense(Users users);
 }

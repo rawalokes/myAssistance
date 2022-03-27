@@ -32,6 +32,7 @@ public class IncomeController {
     @GetMapping("/get-all")
     public String getAll(Model model){
         model.addAttribute("incomeList",incomeService.findAll());
+        model.addAttribute("totalIncome",incomeService.findTotalRemainingIncome());
        return "income/viewIncome";
     }
     @GetMapping("/create")

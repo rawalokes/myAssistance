@@ -17,14 +17,23 @@
         <div id="btn-click">
             <a class="link-all" th:href="@{~/expense/create}">
                 <button class="cssbuttons-io-button">
-                <span>Add Expenses</span>
-            </button></a>
+                    <span>Add Expenses</span>
+                </button>
+            </a>
 
             <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">
                 <button class="cssbuttons-io-button">
-                    <span>Add Expenses</span>
-                </button></a>
+                    <span>log out</span>
+                </button>
+            </a>
+            <div>
+                <label th:for="totalExpense" class="form-label fw-bold">Total Expense</label>
+                <input id="totalExpense" class="totalExpense" th:placeholder="0.00" th:value="${totalExpense}" type="text" readonly>
+                <label th:for="remainingIncome" class="form-label fw-bold">Remaining Income</label>
+                <input id="remainingIncome" class="totalExpense" th:placeholder="0.00" th:value="${remainingIncome}" type="text" readonly>
+            </div>
         </div>
+
 
         <div class="table-wrapper">
             <table class="fl-table">
@@ -38,7 +47,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="expense,index : ${expenseList}" >
+                <tr th:each="expense,index : ${expenseList}">
                     <td th:text="${index.count}"></td>
                     <td th:text="${expense.name}"></td>
                     <td th:text="${expense.amount}"></td>

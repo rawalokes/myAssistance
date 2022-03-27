@@ -44,7 +44,11 @@
 
                 </div>
             </div>
-
+            <div th:if="${errorMessage}">
+                <div class="alert alert-danger">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+            </div>
             <div class="col-12 item-row mt-4">
                 <button type="submit" class="btn btn-primary  px-5 text-white">Create</button>
             </div>

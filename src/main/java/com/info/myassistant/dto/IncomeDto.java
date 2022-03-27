@@ -32,6 +32,7 @@ public class IncomeDto {
     private Integer sourceId;
 
     private String sourceName;
+    private Double totalIncome;
 
 //    public IncomeDto(Income income) {
 //        this.incomeId = income.getIncomeId();

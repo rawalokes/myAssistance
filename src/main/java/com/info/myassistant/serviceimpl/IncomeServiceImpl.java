@@ -3,6 +3,7 @@ package com.info.myassistant.serviceimpl;
 import com.info.myassistant.dto.IncomeDto;
 import com.info.myassistant.dto.ResponseDto;
 import com.info.myassistant.model.Income;
+import com.info.myassistant.repo.ExpenseRepo;
 import com.info.myassistant.repo.IncomeRepo;
 import com.info.myassistant.repo.SourceRepo;
 import com.info.myassistant.service.IncomeService;
@@ -23,11 +24,16 @@ import java.util.stream.Collectors;
 public class IncomeServiceImpl extends BaseResponse implements IncomeService {
     private final IncomeRepo incomeRepo;
     private final SourceRepo sourceRepo;
+    private final ExpenseRepo expenseRepo;
     private final GetCurrentUserDetails currentUserDetails;
 
-    public IncomeServiceImpl(IncomeRepo incomeRepo, SourceRepo sourceRepo, GetCurrentUserDetails currentUserDetails) {
+    public IncomeServiceImpl(IncomeRepo incomeRepo
+            , SourceRepo sourceRepo
+            , ExpenseRepo expenseRepo
+            , GetCurrentUserDetails currentUserDetails) {
         this.incomeRepo = incomeRepo;
         this.sourceRepo = sourceRepo;
+        this.expenseRepo = expenseRepo;
         this.currentUserDetails = currentUserDetails;
     }
 
@@ -59,6 +65,19 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
         return incomes.stream().map(income -> converterIncomeToIncomeDto(income) )
                 .collect(Collectors.toList());
     }
+    public Double findTotalRemainingIncome(){
+        Double income=incomeRepo.findTotalIncome(currentUserDetails.getCurrentUser());
+        if (income==null){
+            return 0.0;
+        }
+        Double expense=expenseRepo.findTotalExpense(currentUserDetails.getCurrentUser());
+        if (expense==null){
+            return income;
+        }
+        Double remainingBalance =income-expense;
+        return remainingBalance;
+
+    }
 
     private IncomeDto converterIncomeToIncomeDto(Income income) {
         return IncomeDto.builder()
@@ -68,6 +87,7 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
                 .sourceName(sourceRepo.findById(income
                                 .getSource().getSourceId())
                         .get().getSourceName())
+                .totalIncome(incomeRepo.findTotalIncome(currentUserDetails.getCurrentUser()))
                 .build();
     }
     private Income converterIncomeDtoToIncome(IncomeDto incomeDto) {
@@ -76,6 +96,7 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
                 .amount(incomeDto.getAmount())
                 .description(incomeDto.getDescription())
                 .source(sourceRepo.findById(incomeDto.getSourceId()).get())
+
                 .build();
     }
 }

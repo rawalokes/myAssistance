@@ -29,6 +29,8 @@ public class ExpenseDto {
     @Min(value = 1,message = "Amount cannot be less than zero")
     private Double amount;
 
+    private Double totalExpense;
+
 
     private ExpenseType expenseType;
 

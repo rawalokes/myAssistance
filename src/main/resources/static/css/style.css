@@ -1299,3 +1299,8 @@ th {
     margin: 20px;
     padding: 5px;
 }
+.totalExpense{
+    width: 100px;
+    text-align: center;
+
+}
