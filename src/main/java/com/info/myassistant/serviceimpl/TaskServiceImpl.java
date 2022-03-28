@@ -76,7 +76,8 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
 
     @Override
     public List<TaskDto> showPendingTask() {
-      List<Task> pendingTask=taskRepo.findTaskByTaskStatus(TaskStatus.pending);
+
+      List<Task> pendingTask=taskRepo.findTaskByTaskStatus(TaskStatus.pending,currentUser.getCurrentUser());
         return pendingTask.stream().map(task -> new TaskDto(task)).collect(Collectors.toList());
     }
 

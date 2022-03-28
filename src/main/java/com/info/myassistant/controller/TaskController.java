@@ -2,6 +2,7 @@ package com.info.myassistant.controller;
 
 import com.info.myassistant.dto.ResponseDto;
 import com.info.myassistant.dto.TaskDto;
+
 import com.info.myassistant.serviceimpl.TaskServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 /**
  * @author rawalokes
@@ -29,6 +31,7 @@ public class TaskController {
         model.addAttribute("taskList", taskService.showCurrentPendingTask());
         return "task/viewTask";
     }
+
     @GetMapping("/pending")
     public String getAllPendingTask(Model model) {
         model.addAttribute("pendingTaskList", taskService.yesterdayTask());
@@ -63,8 +66,7 @@ public class TaskController {
         if (responseDto.isStatus()) {
             model.addAttribute("taskDetails", responseDto.getData());
             return "task/createTask";
-        }
-        else{
+        } else {
             model.addAttribute("errorMessage", responseDto.getMessage());
             return "task/viewTask";
         }
@@ -80,6 +82,7 @@ public class TaskController {
         model.addAttribute("errorMessage", responseDto.getMessage());
         return "task/viewTask";
     }
+
 
 
 

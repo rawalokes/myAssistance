@@ -1,15 +1,17 @@
 package com.info.myassistant.controller;
 
+import com.info.myassistant.dto.ChangePasswordDto;
 import com.info.myassistant.dto.ResponseDto;
 import com.info.myassistant.dto.UserDto;
+import com.info.myassistant.model.Users;
 import com.info.myassistant.serviceimpl.UserServiceImpl;
+import com.info.myassistant.utility.GetCurrentUserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
@@ -21,9 +23,11 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
     private final UserServiceImpl userService;
+    private final GetCurrentUserDetails currentUserDetails;
 
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserServiceImpl userService, GetCurrentUserDetails currentUserDetails) {
         this.userService = userService;
+        this.currentUserDetails = currentUserDetails;
     }
 
     @GetMapping("/login")
@@ -38,8 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String postCreateUser(@Valid @ModelAttribute("userDetails") UserDto userDto
-            , BindingResult bindingResult, Model model) {
+    public String postCreateUser(@Valid @ModelAttribute("userDetails") UserDto userDto, BindingResult bindingResult, Model model) {
         ResponseDto responseDto = userService.create(userDto);
         if (bindingResult.hasErrors()) {
             return "users/createUser";
@@ -51,6 +54,34 @@ public class UserController {
             return "users/createUser";
         }
 
+    }
+
+    @GetMapping("/change-password")
+    public String getChangePassword(Model model) {
+        model.addAttribute("passwordDetail", new ChangePasswordDto());
+        return "users/changePassword";
+    }
+
+    @PostMapping("/change-password")
+    public String postChangePassword(@Valid @ModelAttribute("passwordDetail") ChangePasswordDto changePasswordDto, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "users/changePassword";
+        }
+        System.out.println(changePasswordDto.getPassword());
+        System.out.println(changePasswordDto.getConfirmPassword() + "_____________");
+        UserDto userDto = new UserDto(changePasswordDto);
+        Users users = currentUserDetails.getCurrentUser();
+        userDto.setUserId(users.getId());
+        ResponseDto responseDto = userService.create(userDto);
+
+        if (responseDto.isStatus()) {
+            return "redirect:/change-password?changed";
+        } else {
+            model.addAttribute("errorMessage", responseDto.getMessage());
+            System.out.println(responseDto.getMessage());
+            return "users/changePassword";
+        }
     }
 
 }

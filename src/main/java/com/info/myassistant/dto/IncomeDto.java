@@ -1,12 +1,11 @@
 package com.info.myassistant.dto;
 
-import com.info.myassistant.model.Income;
 import lombok.*;
-import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 /**
  * @author rawalokes
@@ -21,17 +20,20 @@ import javax.validation.constraints.Pattern;
 public class IncomeDto {
 
     private Integer incomeId;
+
+
     @NotNull(message = "Amount cannot be Empty")
-    @Min(value = 1,message = "Amount cannot be less than zero")
+    @Min(value = 1, message = "Amount cannot be less than zero")
     private Double amount;
 
 
     private String description;
-   @NotNull(message = "Please select a source")
-   @Min(value =1,message = "Please select source")
+    @NotNull(message = "Please select a source")
+    @Min(value = 1, message = "Please select source")
     private Integer sourceId;
 
     private String sourceName;
+
     private Double totalIncome;
 
 //    public IncomeDto(Income income) {

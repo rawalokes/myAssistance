@@ -12,7 +12,12 @@ import java.util.List;
 
 @Repository
 public interface TaskRepo extends JpaRepository<Task,Integer> {
-    List<Task> findTaskByTaskStatus(TaskStatus taskStatus);
+    @Query("SELECT t FROM Task t where t.users=?1" )
+    List<Task> findAllTaskByUser(Users task);
+
+    @Query("SELECT t FROM Task t WHERE  t.taskStatus = ?1 and t.users=?2")
+    List<Task> findTaskByTaskStatus(TaskStatus taskStatus ,Users users);
+
     @Query("SELECT t FROM Task t WHERE  t.date = ?1 and t.users=?2")
     List<Task> findTaskByDate(LocalDate date,Users users);
 
@@ -21,5 +26,6 @@ public interface TaskRepo extends JpaRepository<Task,Integer> {
 
     @Query("SELECT t FROM Task t WHERE t.date = ?1 and t.taskStatus = ?2 and t.users=?3 ORDER BY t.date desc ")
     List<Task> findYesterdayByDate(LocalDate date,TaskStatus taskStatus,Users users);
+
 
 }

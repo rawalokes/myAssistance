@@ -28,12 +28,17 @@
                     <span>Add Expenses</span>
                 </button>
             </a>
+            <a class="link-all" th:href="@{~/expense/graph}">
+                <button class="cssbuttons-io-button">
+                    <span>Graph</span>
+                </button>
+            </a>
 
-    <!--            <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">-->
-    <!--                <button class="cssbuttons-io-button">-->
-    <!--                    <span>log out</span>-->
-    <!--                </button>-->
-    <!--            </a>-->
+                <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">
+                    <button class="cssbuttons-io-button">
+                        <span>log out</span>
+                    </button>
+                </a>
 
         </div>
 

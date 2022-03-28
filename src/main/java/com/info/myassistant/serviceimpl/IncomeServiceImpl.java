@@ -45,7 +45,8 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
             incomeRepo.save(income);
             return successResponse("Income Saved Successfully", null);
         }catch (NumberFormatException e){
-          return errorResponse("Please enter numbers",null);
+            System.out.println(e);
+            return errorResponse("Please enter numbers",null);
         }
 
     }

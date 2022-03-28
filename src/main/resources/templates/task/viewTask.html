@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -7,7 +8,7 @@
 
 
     <link rel="stylesheet" th:href="@{../css/style.css}">
-    <title>Todo</title>
+    <title>task</title>
 </head>
 <body>
 <div th:replace="fragment/generics :: cdntestcss"></div>
@@ -23,10 +24,25 @@
                     <span>Pending Task</span>
                 </button>
             </a>
+            <a class="link-all" th:href="@{~/task/pie}">
+                <button class="cssbuttons-io-button">
+                    <span>Pie chart</span>
+                </button>
+            </a>
             <a class="link-all" th:href="@{~/task/create}">
             <button class="cssbuttons-io-button">
                  <span>Add Task</span>
             </button>
+            </a>
+            <a class="link-all" th:href="@{~/download/task.xlsx}">
+                <button class="cssbuttons-io-button">
+                    <span>Download</span>
+                </button>
+            </a>
+            <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">
+                <button class="cssbuttons-io-button">
+                    <span>log out</span>
+                </button>
             </a>
 
         </div>

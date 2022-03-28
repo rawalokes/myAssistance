@@ -36,6 +36,8 @@ public class UserDto {
 //    @Size(min = 8,message = "Password must of minimum 8 character")
 //    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$",message = "Password must consist of one uppercase , lowercase ,special character and number")
     private String password;
+    private String confirmPassword;
+
 
     private String role;
 
@@ -46,6 +48,10 @@ public class UserDto {
         this.email = users.getEmail();
         this.password = users.getPassword();
 //        this.role=user.getRole();
+    }
+    public UserDto(ChangePasswordDto changePasswordDto){
+        this.password=changePasswordDto.getPassword();
+        this.confirmPassword=changePasswordDto.getConfirmPassword();
     }
 }
 

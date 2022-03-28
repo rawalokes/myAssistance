@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 /**
  * @author rawalokes
@@ -27,12 +28,14 @@ public class ExpenseDto {
 
     @NotNull(message = "Amount cannot be Empty")
     @Min(value = 1,message = "Amount cannot be less than zero")
+
     private Double amount;
+
 
     private Double totalExpense;
 
+    private LocalDate date;
 
-    private ExpenseType expenseType;
 
     private Integer userId;
 
@@ -41,8 +44,9 @@ public class ExpenseDto {
         this.id = expense.getId();
         this.name = expense.getName();
         this.amount = expense.getAmount();
-        this.expenseType = expense.getExpenseType();
+
         this.description = expense.getDescription();
+        this.date=expense.getDate();
 
     }
 

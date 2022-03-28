@@ -18,8 +18,14 @@ public class GetCurrentUserDetails {
         this.userRepo = userRepo;
     }
 
+    /**
+     * find current user and return
+     * @return current user
+     */
     public  Users getCurrentUser(){
+        //get login users email
         String username= SecurityContextHolder.getContext().getAuthentication().getName();
+        //find login user based on email address and  return login user object
         return userRepo.findByEmail(username);
     }
 }

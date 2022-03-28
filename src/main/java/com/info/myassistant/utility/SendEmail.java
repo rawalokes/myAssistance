@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SendEmail {
-    public void sendEmail(String emailAddress, String name, String password,Boolean updateStatus) {
+    public void sendEmail(String emailAddress, String name, String password) {
 
         try {
             Email email = new SimpleEmail();
@@ -29,8 +29,8 @@ public class SendEmail {
             email.setSSLOnConnect(true);
             email.setFrom("tryingdemo65@gmail.com");
             email.setMsg("Hi " + name + " ," +
-                    "\n Your myAssistant password is  "+password+""+
-                    "\n Please change the password after sign up ");
+                    "\n Your myAssistant password is  " + password + "" +
+                    "\n");
             email.addTo(emailAddress);
             email.send();
         } catch (Exception e) {

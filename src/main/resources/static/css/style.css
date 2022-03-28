@@ -142,15 +142,12 @@ th {
 }
 
 .link-all {
-    color: #fff;
+    color: #45a5da;
     text-decoration: none;
     margin-right: 10px;
 }
 
-.link-all:hover {
-    color: #fff;
-    text-decoration: none;
-}
+
 
 .add-task {
     margin-top: 10px;

@@ -5,6 +5,7 @@ import com.info.myassistant.enums.ExpenseType;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 /**
  * @author rawalokes
@@ -24,8 +25,7 @@ public class Expense {
     private Integer id;
     private String name;
     private Double amount;
-    @Enumerated(value = EnumType.STRING)
-    private ExpenseType expenseType;
+    private LocalDate date;
     private String description;
     @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id",
@@ -36,8 +36,7 @@ public class Expense {
         this.id = expenseDto.getId();
         this.name = expenseDto.getName();
         this.amount = expenseDto.getAmount();
-        this.expenseType = expenseDto.getExpenseType();
         this.description = expenseDto.getDescription();
-
+        this.date=LocalDate.now();
     }
 }

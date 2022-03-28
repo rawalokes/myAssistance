@@ -1,6 +1,7 @@
 <!doctype html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -11,9 +12,9 @@
 </head>
 <body>
 <div th:fragment="cdntestcss">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
 </div>
 <div th:fragment="cdntestjs">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
@@ -28,43 +29,59 @@
 
 </div>
 <div th:fragment="sidenavbar">
-        <nav id="sidebar" class="">
-            <div class="p-4 pt-5 nav-height" >
-                <h1><button class="btn btn-toggle align-items-center rounded collapsed dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dash-collapse" aria-expanded="false"><a th:href="@{~/}" class="logo">Assistant</a></button>
-                    <div class="collapse" id="dash-collapse">
+    <nav id="sidebar" class="">
+        <div class="p-4 pt-5 nav-height">
+            <h1>
+                <button class="btn btn-toggle align-items-center rounded collapsed dropdown-toggle"
+                        data-bs-toggle="collapse" data-bs-target="#dash-collapse" aria-expanded="false"><a
+                        th:href="@{~/}" class="logo">Assistant</a></button>
+                <div  class="collapse" id="dash-collapse">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a th:href="@{~/change-password}" class="link-dark rounded task">Change Password</a></li>
+<!--                        <li>-->
+<!--                                        <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">-->
+<!--                                            <button class="cssbuttons-io-button">-->
+<!--                                                <span>log out</span>-->
+<!--                                            </button>-->
+<!--                                        </a>-->
+<!--                        </li>-->
+                    </ul>
+                </div>
+                </a></h1>
+
+            <ul class="list-unstyled components mb-5">
+                <li>
+                    <button class="btn btn-toggle align-items-center rounded collapsed">
+                        <a class="link-all" th:href="@{~/}">Weather</a></button>
+                </li>
+                <li>
+                    <button class="btn btn-toggle align-items-center rounded collapsed dropdown-toggle"
+                            data-bs-toggle="collapse" data-bs-target="#dashboard-collapse"
+                            aria-expanded="false"><a class="link-all" href="todo.html">Todo</a></button>
+                    <div class="collapse" id="dashboard-collapse">
                         <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                            <li><a th:href="@{~/task/get-all}" class="link-dark rounded task">Profile</a></li>
-                            <li><a th:href="@{~/task/create}" class="link-dark rounded task">Sign Out</a></li>
+                            <li><a th:href="@{~/task/get-all}" class="link-dark rounded task">View Task</a></li>
+                            <li><a th:href="@{~/task/create}" class="link-dark rounded task">Add Task</a></li>
                         </ul>
-                    </div></a></h1>
+                    </div>
+                </li>
 
-                <ul class="list-unstyled components mb-5">
-                    <li>
-                        <button class="btn btn-toggle align-items-center rounded collapsed"><a class="link-all" th:href="@{~/}">Weather</a></button>
-                    </li>
-                    <li>
-                        <button class="btn btn-toggle align-items-center rounded collapsed dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false"><a class="link-all" href="todo.html">Todo</a></button>
-                        <div class="collapse" id="dashboard-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a th:href="@{~/task/get-all}" class="link-dark rounded task">View Task</a></li>
-                                <li><a th:href="@{~/task/create}" class="link-dark rounded task">Add Task</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li>
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false"><a id="active" class="link-all" href="account.html">Account</a></button>
-                        <div class="collapse" id="account-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li><a th:href="@{~/income/get-all}" class="link-dark rounded task">Income</a></li>
-                                <li><a th:href="@{~/expense/get-all}" class="link-dark rounded task">Expenses</a></li>
-                                <li><a th:href="@{~/source/get-all}" class="link-dark rounded task">Sources</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+                <li>
+                    <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#account-collapse" aria-expanded="false"><a id="active" class="link-all"
+                                                                                        href="account.html">Account</a>
+                    </button>
+                    <div class="collapse" id="account-collapse">
+                        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                            <li><a th:href="@{~/income/get-all}" class="link-dark rounded task">Income</a></li>
+                            <li><a th:href="@{~/expense/get-all}" class="link-dark rounded task">Expenses</a></li>
+                            <li><a th:href="@{~/source/get-all}" class="link-dark rounded task">Sources</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
 </div>
 

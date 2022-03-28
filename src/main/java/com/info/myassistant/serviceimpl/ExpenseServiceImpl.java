@@ -39,8 +39,14 @@ public class ExpenseServiceImpl extends BaseResponse implements ExpenseService {
     public ResponseDto create(ExpenseDto expenseDto) {
         try {
             Users currentUser = currentUserDetails.getCurrentUser();
+            System.out.println("------------1--------------------------");
             Expense expense = new Expense(expenseDto);
+            System.out.println("-----------------2---------------------");
+
             expense.setUsers(currentUser);
+            System.out.println("----------------3----------------------");
+
+            expenseRepo.save(expense);
             if (validateExpenseEntry.validateExpense(expenseDto)){
                 expenseRepo.save(expense);
                 return successResponse("Expense added successfully",null );
@@ -50,7 +56,7 @@ public class ExpenseServiceImpl extends BaseResponse implements ExpenseService {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e);
             return null;
         }
 

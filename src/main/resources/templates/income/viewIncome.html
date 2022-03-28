@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -19,12 +20,16 @@
             <a class="link-all" th:href="@{~/income/create}">
             <button class="cssbuttons-io-button">
                 <span>Add Income</span>
-            </butt<div>-->
-                <!--                <label th:for="totalIncome" class="form-label fw-bold">Total Income</label>-->
-                <!--                <input id="totalIncome" class="totalExpense" th:placeholder="0.00" th:value="${totalIncome}" type="text" readonly>-->
-                <!--            </div>on></a>
-                <!--            -->
+            </button>
+            </a>
+            <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">
+                <button class="cssbuttons-io-button">
+                    <span>log out</span>
+                </button>
+            </a>
         </div>
+
+
         <div class="table-wrapper">
             <table class="fl-table">
                 <thead>
@@ -33,7 +38,7 @@
                     <th>Source</th>
                     <th>Amount</th>
                     <th>Description</th>
-                    <th>Action</th>
+<!--                    <th>Action</th>-->
                 </tr>
                 </thead>
                 <tbody>
@@ -42,10 +47,10 @@
                     <td th:text="${income.sourceName}" ></td>
                     <td th:text="${income.amount}"></td>
                     <td th:text="${income.description}"></td>
-                    <td>
-                        <button type="button" class="btn btn-success">Edit</button>
-<!--                        <button type="button" class="btn btn-danger">Delete</button>-->
-                    </td>
+<!--                    <td>-->
+<!--                        <button type="button" class="btn btn-success">Edit</button>-->
+
+<!--                    </td>-->
                 </tr>
 
                 <tbody>
@@ -53,7 +58,7 @@
 
         </div>
     </div>
-
 </div>
+
 </body>
 </html>
