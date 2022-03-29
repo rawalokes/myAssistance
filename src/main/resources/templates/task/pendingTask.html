@@ -39,7 +39,7 @@
                     <th>Remarks</th>
                     <th>Date</th>
                     <th>Status</th>
-
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -49,6 +49,10 @@
                     <td th:text="${task.remarks}"></td>
                     <td th:text="${task.date}"></td>
                     <td th:text="${task.taskStatus}"></td>
+                    <td>
+                        <a th:href="@{~/task/renew/{id} (id= ${task.taskId})}" >  <button type="button" class="btn btn-danger">Add</button></a>
+
+                    </td>
 
                 </tr>
 

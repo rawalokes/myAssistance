@@ -125,4 +125,16 @@ public class TaskController {
         model.addAttribute("errorMessage", responseDto.getMessage());
         return "task/viewTask";
     }
+    @GetMapping("/renew/{id}")
+    public String markTaskasTodayTask(@PathVariable Integer id, Model model) {
+        //call service to find and marks as complete
+        ResponseDto responseDto = taskService.addOldTaskToTodayTask(id);
+        //check responseDto status is true and redirect to view all tasks
+        if (responseDto.isStatus()) {
+            return "redirect:/task/get-all";
+        }
+        //if responseDto status is false return create task form with error message
+        model.addAttribute("errorMessage", responseDto.getMessage());
+        return "task/pendingTask";
+    }
 }

@@ -18,7 +18,9 @@ public interface TaskService extends GenericService<TaskDto,Integer> {
    List<TaskDto> showCurrentPendingTask();
    List<TaskDto> showPendingTask();
    List<TaskDto> yesterdayTask();
+   List<TaskDto> showCompleteTask();
+   ResponseDto addOldTaskToTodayTask(Integer id);
    ResponseDto markTaskComplete(Integer id);
-   ResponseDto findByDate(LocalDate date);
+   ResponseDto findByDate();
 
 }

@@ -48,7 +48,7 @@ public class Task {
     public Task(TaskDto taskDto) {
         this.taskId = taskDto.getTaskId();
         this.name = taskDto.getName();
-        this.date =LocalDate.now().minusDays(1);
+        this.date =LocalDate.now();
         this.taskStatus=taskDto.getTaskStatus();
         this.remarks = taskDto.getRemarks();
     }

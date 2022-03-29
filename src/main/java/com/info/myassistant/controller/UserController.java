@@ -30,25 +30,46 @@ public class UserController {
         this.currentUserDetails = currentUserDetails;
     }
 
+    /**
+     *
+     * @return login page
+     */
     @GetMapping("/login")
     public String userLogin() {
         return "users/login";
     }
 
+    /**
+     *
+     * @param model
+     * @return user register page
+     */
     @GetMapping("/register")
     public String getCreateUSer(Model model) {
         model.addAttribute("userDetails", new UserDto());
         return "users/createUser";
     }
 
+    /**
+     *
+     * @param userDto
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping("/register")
-    public String postCreateUser(@Valid @ModelAttribute("userDetails") UserDto userDto, BindingResult bindingResult, Model model) {
-        ResponseDto responseDto = userService.create(userDto);
+    public String postCreateUser(@Valid @ModelAttribute("userDetails") UserDto userDto
+            , BindingResult bindingResult, Model model) {
+
         if (bindingResult.hasErrors()) {
             return "users/createUser";
         }
+        //call service to create user
+        ResponseDto responseDto = userService.create(userDto);
+        //check responseDto status is true and redirect to view all user
         if (responseDto.isStatus()) {
             return "redirect:/register?created";
+            //if responseDto status is false return create user form with error message
         } else {
             model.addAttribute("errorMessage", responseDto.getMessage());
             return "users/createUser";
@@ -68,8 +89,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "users/changePassword";
         }
-        System.out.println(changePasswordDto.getPassword());
-        System.out.println(changePasswordDto.getConfirmPassword() + "_____________");
+
         UserDto userDto = new UserDto(changePasswordDto);
         Users users = currentUserDetails.getCurrentUser();
         userDto.setUserId(users.getId());

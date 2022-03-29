@@ -15,7 +15,7 @@ public class PasswordGenerator {
         String specialChar="<>.,?{}[]~@#$%^&*)_(_+|/";
 
         String combo=uppercase+lowercase+num+specialChar;
-        char [] password=new char[8];
+        char [] password=new char[7];
         Random r=new Random();
         for (int i=0;i<8;i++){
             password[i]=combo.charAt(r.nextInt(combo.length()));

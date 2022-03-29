@@ -17,8 +17,7 @@ import javax.validation.constraints.*;
 @Builder
 public class SourceDto {
     private Integer id;
-    @NotEmpty(message = "Source cannot be Empty")
-    @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "Source cannot be Empty")
+    @Pattern(regexp = "\\A(?!\\s*\\Z).+",message = "")
     private String sourceName;
 
     private String description;

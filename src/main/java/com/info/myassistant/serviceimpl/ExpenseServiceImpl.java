@@ -38,28 +38,28 @@ public class ExpenseServiceImpl extends BaseResponse implements ExpenseService {
     @Override
     public ResponseDto create(ExpenseDto expenseDto) {
         try {
+            //get current user
             Users currentUser = currentUserDetails.getCurrentUser();
-            System.out.println("------------1--------------------------");
+            //convert expenseDto into expense
             Expense expense = new Expense(expenseDto);
-            System.out.println("-----------------2---------------------");
-
+            //set user as current user in expense
             expense.setUsers(currentUser);
-            System.out.println("----------------3----------------------");
-
-            expenseRepo.save(expense);
-            if (validateExpenseEntry.validateExpense(expenseDto)){
+            //use ValidExpenseEntry class to validate expense
+            if (validateExpenseEntry.validateExpense(expenseDto)) {
+                //store expense in database
                 expenseRepo.save(expense);
-                return successResponse("Expense added successfully",null );
+                return successResponse("Expense added successfully", null);
 
-            }else {
-               return errorResponse("Expense exceed income",null);
+            } else {
+                return errorResponse("Expense exceed income", null);
             }
 
         } catch (Exception e) {
-            System.out.println(e);
-            return null;
+           errorResponse(e.getMessage(),null);
+
         }
 
+        return null;
     }
 
     @Override
@@ -77,6 +77,10 @@ public class ExpenseServiceImpl extends BaseResponse implements ExpenseService {
         return expenses.stream().map(expense -> new ExpenseDto(expense)).collect(Collectors.toList());
     }
 
+    /**
+     *
+     * @return total expense of current user
+     */
     public Double findTotalExpense() {
         return expenseRepo.findTotalExpense(currentUserDetails.getCurrentUser());
     }

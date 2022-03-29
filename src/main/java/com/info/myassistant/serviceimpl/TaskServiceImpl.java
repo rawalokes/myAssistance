@@ -4,13 +4,10 @@ import com.info.myassistant.dto.ResponseDto;
 import com.info.myassistant.dto.TaskDto;
 import com.info.myassistant.enums.TaskStatus;
 import com.info.myassistant.model.Task;
-import com.info.myassistant.model.Users;
 import com.info.myassistant.repo.TaskRepo;
-import com.info.myassistant.repo.UserRepo;
 import com.info.myassistant.service.TaskService;
 import com.info.myassistant.shared.BaseResponse;
 import com.info.myassistant.utility.GetCurrentUserDetails;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class TaskServiceImpl extends BaseResponse implements TaskService {
 
-    private  final TaskRepo taskRepo;
+    private final TaskRepo taskRepo;
     private final GetCurrentUserDetails currentUser;
 
     public TaskServiceImpl(TaskRepo taskRepo, GetCurrentUserDetails currentUser) {
@@ -70,23 +67,52 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
 
     @Override
     public List<TaskDto> showCurrentPendingTask() {
-        List<Task> tasks = taskRepo.findAllCurrentTask(TaskStatus.pending,LocalDate.now(),currentUser.getCurrentUser());
+        List<Task> tasks = taskRepo.findAllTaskByStatus(TaskStatus.pending, LocalDate.now(), currentUser.getCurrentUser());
         return tasks.stream().map(task -> new TaskDto(task)).collect(Collectors.toList());
     }
 
     @Override
     public List<TaskDto> showPendingTask() {
-
-      List<Task> pendingTask=taskRepo.findTaskByTaskStatus(TaskStatus.pending,currentUser.getCurrentUser());
+        List<Task> pendingTask = taskRepo.findTaskByTaskStatus(TaskStatus.pending, currentUser.getCurrentUser());
         return pendingTask.stream().map(task -> new TaskDto(task)).collect(Collectors.toList());
     }
 
+
     @Override
     public List<TaskDto> yesterdayTask() {
-        LocalDate yesterday= LocalDate.now().minusDays(1);
-        List<Task> yesterdayTask= taskRepo.findYesterdayByDate(yesterday,TaskStatus.pending,currentUser.getCurrentUser());
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+        List<Task> yesterdayTask = taskRepo.findAllTaskByStatus(TaskStatus.pending, yesterday, currentUser.getCurrentUser());
         return yesterdayTask.stream().map(task -> new TaskDto(task)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<TaskDto> showCompleteTask() {
+        try {
+            List<Task> task=taskRepo.findTaskByTaskStatus
+                    (TaskStatus.completed,currentUser.getCurrentUser());
+            List<TaskDto> taskDtos=task.stream().map(currentTask ->new TaskDto(currentTask)).collect(Collectors.toList());
+//            successResponse("Added successfully",taskDtos);
+        }catch (NullPointerException e){
+//            errorResponse("No data found",null);
+        }
+        return null;
+    }
+
+    @Override
+    public ResponseDto addOldTaskToTodayTask(Integer id) {
+        Optional<Task> task = taskRepo.findById(id);
+        if (task.isPresent()) {
+            //retrieve task from database
+            Task databaseTask = task.get();
+            //set date as current date
+            databaseTask.setDate(LocalDate.now());
+            //save updated task to database
+            taskRepo.save(databaseTask);
+            return successResponse(" Task added successfully",null);
+        }
+        return errorResponse("Task not found",null);
+    }
+
 
     @Override
     public ResponseDto markTaskComplete(Integer id) {
@@ -95,15 +121,15 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
             Task dataBaseTask = task.get();
             dataBaseTask.setTaskStatus(TaskStatus.completed);
             taskRepo.save(dataBaseTask);
-            return successResponse("Task Marked ad completed", null);
+            return successResponse("Task Marked as completed", null);
         } else {
             return errorResponse("No such task Found", null);
         }
     }
 
     @Override
-    public ResponseDto findByDate(LocalDate date) {
-        List<Task> tasks = taskRepo.findTaskByDate(LocalDate.now(),currentUser.getCurrentUser());
+    public ResponseDto findByDate() {
+        List<Task> tasks = taskRepo.findTaskByDate(LocalDate.now(), currentUser.getCurrentUser());
         if (tasks != null)
             return successResponse("", tasks);
         else

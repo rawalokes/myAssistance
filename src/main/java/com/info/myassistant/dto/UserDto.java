@@ -29,12 +29,12 @@ public class UserDto {
     private String name;
 
     @Email(message = "Invalid email")
-    @NotEmpty(message = "Email cannot be null")
-
+    @NotEmpty(message = "Email cannot be empty")
     private String email;
 
 //    @Size(min = 8,message = "Password must of minimum 8 character")
 //    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$",message = "Password must consist of one uppercase , lowercase ,special character and number")
+    @NotEmpty(message = "Password cannot be empty")
     private String password;
     private String confirmPassword;
 

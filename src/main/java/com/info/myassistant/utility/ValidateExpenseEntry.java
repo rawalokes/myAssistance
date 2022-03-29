@@ -1,11 +1,9 @@
 package com.info.myassistant.utility;
 
 import com.info.myassistant.dto.ExpenseDto;
-import com.info.myassistant.dto.ResponseDto;
 import com.info.myassistant.model.Users;
 import com.info.myassistant.repo.ExpenseRepo;
 import com.info.myassistant.repo.IncomeRepo;
-import com.info.myassistant.shared.BaseResponse;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,21 +23,32 @@ public class ValidateExpenseEntry{
         this.expenseRepo = expenseRepo;
         this.currentUserDetails = currentUserDetails;
     }
-    public Boolean validateExpense(ExpenseDto expenseDto){
-        Users currentUser=currentUserDetails.getCurrentUser();
-        Double currentAmount=expenseDto.getAmount();
-        if (currentAmount==null){
-            currentAmount=0.0;
-        }
-        Double totalIncome = incomeRepo.findTotalIncome(currentUser);
-        Double totalExpesne = expenseRepo.findTotalExpense(currentUser)+currentAmount;
 
+    /**
+     *  validate expense by checking if income is greater than expense
+     * @param expenseDto
+     * @return
+     */
+    public Boolean validateExpense(ExpenseDto expenseDto){
+        //get current user
+        Users currentUser=currentUserDetails.getCurrentUser();
+        //get current expense amount user wish to save
+        Double currentAmount=expenseDto.getAmount();
+        //get user's total income
+        Double totalIncome = incomeRepo.findTotalIncome(currentUser);
+        //if null set value to zero to avoid NullPointException and show total income as zero
         if (totalIncome==null)
             totalIncome=0.0;
-        if (totalExpesne==null)
-            totalExpesne=0.0;
-
-        if (totalIncome >= totalExpesne) {
+        //get total user's expense and set total expense to zero if it return null
+        Double totalExpense = expenseRepo.findTotalExpense(currentUser);
+        if (totalExpense==null)
+            totalExpense=0.0;
+        //total expense in database plus current amount expense amount entered by user
+        Double afterCurrentExpenseTotal =totalExpense+currentAmount;
+        /**
+         * return true if total expense is less than or equals to total expense else false
+         */
+        if (totalIncome >= afterCurrentExpenseTotal) {
             return true;
         }
         else {
