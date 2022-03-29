@@ -29,29 +29,56 @@ public class IncomeController {
         this.incomeService = incomeService;
         this.sourceService = sourceService;
     }
+
+    /**
+     *
+     * @param model
+     * @return view of all income pages
+     */
     @GetMapping("/get-all")
     public String getAll(Model model){
+        // list of current user income
         model.addAttribute("incomeList",incomeService.findAll());
+        // total income minus total expense
         model.addAttribute("totalIncome",incomeService.findTotalRemainingIncome());
        return "income/viewIncome";
     }
+
+    /**
+     *
+     * @param model
+     * @return create income form page
+     */
     @GetMapping("/create")
     public String getCreateIncome(Model model){
         model.addAttribute("incomeDetails",new IncomeDto());
+        //list if source for current user
         model.addAttribute("sourcesDetails",sourceService.findAllSource());
       return "income/createIncome";
     }
+
+    /**
+     *
+     * @param bindingResult for error handeling
+     * @param model
+     * @return view all income page
+     */
     @PostMapping("/create")
     public String postCreateIncome(@Valid @ModelAttribute("incomeDetails") IncomeDto incomeDto
             , BindingResult bindingResult,Model model){
+        //check if there is any binding error if present return create income page with error
         if (bindingResult.hasErrors()){
+            //list if source for current user
             model.addAttribute("sourcesDetails",sourceService.findAllSource());
             return "income/createIncome";
         }
+        //call service to create income
         ResponseDto responseDto= incomeService.create(incomeDto);
+        //check responseDto status is true and return list of income page
         if(responseDto.isStatus()) {
            return "redirect:/income/get-all";
         }
+        //if responseDto status is false return create income form with error message
         model.addAttribute("errorMessage", responseDto.getMessage());
         return "income/createIncome";
     }

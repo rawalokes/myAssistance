@@ -28,8 +28,12 @@ public class ValidateExpenseEntry{
     public Boolean validateExpense(ExpenseDto expenseDto){
         Users currentUser=currentUserDetails.getCurrentUser();
         Double currentAmount=expenseDto.getAmount();
+        if (currentAmount==null){
+            currentAmount=0.0;
+        }
         Double totalIncome = incomeRepo.findTotalIncome(currentUser);
         Double totalExpesne = expenseRepo.findTotalExpense(currentUser)+currentAmount;
+
         if (totalIncome==null)
             totalIncome=0.0;
         if (totalExpesne==null)
