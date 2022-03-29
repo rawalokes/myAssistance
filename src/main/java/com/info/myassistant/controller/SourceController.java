@@ -52,7 +52,7 @@ public class SourceController {
      */
     @PostMapping("/create")
     public String postCreateSource(@Valid @ModelAttribute("SourceDetails") SourceDto sourceDto, BindingResult bindingResult, Model model) {
-        //check if there is any binding error if present return create source page with error
+        //check if there is any binding error  present return create source page with error
         if (bindingResult.hasErrors()) {
             return "source/createSource";
         }
