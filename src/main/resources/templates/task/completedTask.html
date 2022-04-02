@@ -31,8 +31,6 @@
 
         </div>
         <div class="table-wrapper">
-            <div class="head">showing pending task except today's pending task</div>
-            <br>
             <table class="fl-table">
                 <thead>
                 <tr>
@@ -41,20 +39,16 @@
                     <th>Remarks</th>
                     <th>Date</th>
                     <th>Status</th>
-                    <th>Action</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="task,index : ${pendingTaskList}">
+                <tr th:each="completeTask,index : ${completeTaskList}">
                     <td th:text="${index.count}"></td>
-                    <td th:text="${task.name}"></td>
-                    <td th:text="${task.remarks}"></td>
-                    <td th:text="${task.date}"></td>
-                    <td th:text="${task.taskStatus}"></td>
-                    <td>
-                        <a th:href="@{~/task/renew/{id} (id= ${task.taskId})}" >  <button type="button" class="btn btn-danger">Add</button></a>
-
-                    </td>
+                    <td th:text="${completeTask.name}"></td>
+                    <td th:text="${completeTask.remarks}"></td>
+                    <td th:text="${completeTask.date}"></td>
+                    <td th:text="${completeTask.taskStatus}"></td>
 
                 </tr>
 

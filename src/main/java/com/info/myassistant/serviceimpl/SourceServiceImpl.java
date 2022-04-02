@@ -31,8 +31,11 @@ public class SourceServiceImpl extends BaseResponse implements SourceService {
     @Override
     public ResponseDto create(SourceDto sourceDto) {
         if (sourceDto != null) {
+            //convert source dto into source
             Source source = new Source(sourceDto);
+            //get currently login user and set as foreign key in source table
             source.setUsers(currentUserDetails.getCurrentUser());
+//            save source
             sourceRepo.save(source);
             return successResponse("Source added successfully", null);
         }
@@ -51,6 +54,9 @@ public class SourceServiceImpl extends BaseResponse implements SourceService {
 
     @Override
     public List<SourceDto> findAllSource() {
+        //find all source for current user
+        //delete status is for soft delete
+        //if delete status is ture than source will not display
         List<Source> sources = sourceRepo.findAllSource(currentUserDetails
                 .getCurrentUser(),false);
         return sources.stream().map(source -> new SourceDto(source))
@@ -59,10 +65,13 @@ public class SourceServiceImpl extends BaseResponse implements SourceService {
 
     @Override
     public ResponseDto removeSource(Integer integer) {
+        //find source by source id
         Optional<Source> source=sourceRepo.findById(integer);
         if (source.isPresent()){
             Source databaseSource= source.get();
+            //set delete source to true so that it won't be displayed
             databaseSource.setDeleteStatus(true);
+            //update source
             sourceRepo.save(databaseSource);
             return successResponse("Source deleted successfully",null);
         }

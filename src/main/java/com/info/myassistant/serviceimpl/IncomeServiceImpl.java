@@ -40,12 +40,14 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
     @Override
     public ResponseDto create(IncomeDto incomeDto) {
         try {
+            //convert income dto to income
             Income income = converterIncomeDtoToIncome(incomeDto);
+            //set current user as foreign key on income table
             income.setUsers(currentUserDetails.getCurrentUser());
+            //create income
             incomeRepo.save(income);
             return successResponse("Income Saved Successfully", null);
         }catch (NumberFormatException e){
-            System.out.println(e);
             return errorResponse("Please enter numbers",null);
         }
 
@@ -53,6 +55,7 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
 
     @Override
     public ResponseDto findByID(Integer integer) {
+        //find income by id
         Optional<Income> income= incomeRepo.findById(integer);
         if (income.isPresent()){
             return successResponse("",income);
@@ -62,40 +65,64 @@ public class IncomeServiceImpl extends BaseResponse implements IncomeService {
 
     @Override
     public List<IncomeDto> findAll() {
+        //find all income for current user
         List<Income> incomes = incomeRepo.findAllIncome(currentUserDetails.getCurrentUser());
+        //return list of income dto
+        //convert income into income dto
         return incomes.stream().map(income -> converterIncomeToIncomeDto(income) )
                 .collect(Collectors.toList());
     }
     public Double findTotalRemainingIncome(){
+        //find total income amount
         Double income=incomeRepo.findTotalIncome(currentUserDetails.getCurrentUser());
+        //if total amount is null return 0 to avoid NullPointException
         if (income==null){
             return 0.0;
         }
+        //find total expense amount
         Double expense=expenseRepo.findTotalExpense(currentUserDetails.getCurrentUser());
+        //if total amount is null return 0 to avoid NullPointException
         if (expense==null){
             return income;
         }
+        //get remaining balance by subtracting expense from  income
         Double remainingBalance =income-expense;
         return remainingBalance;
 
     }
 
+    /**
+     *convert income into income dto
+     *
+     * @param income to be converted into dto
+     * @return income dto
+     */
     private IncomeDto converterIncomeToIncomeDto(Income income) {
         return IncomeDto.builder()
                 .incomeId(income.getIncomeId())
                 .amount(income.getAmount())
                 .description(income.getDescription())
+                //find source name
                 .sourceName(sourceRepo.findById(income
                                 .getSource().getSourceId())
                         .get().getSourceName())
+                //get total income user have
                 .totalIncome(incomeRepo.findTotalIncome(currentUserDetails.getCurrentUser()))
                 .build();
     }
+
+    /**
+     * convert incomeDto into income
+     *
+     * @param incomeDto to be converted into income
+     * @return income
+     */
     private Income converterIncomeDtoToIncome(IncomeDto incomeDto) {
         return Income.builder()
                 .incomeId(incomeDto.getIncomeId())
                 .amount(incomeDto.getAmount())
                 .description(incomeDto.getDescription())
+                //find source by source id
                 .source(sourceRepo.findById(incomeDto.getSourceId()).get())
 
                 .build();

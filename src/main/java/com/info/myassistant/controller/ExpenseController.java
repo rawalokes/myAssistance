@@ -28,6 +28,11 @@ public class ExpenseController {
         this.incomeService = incomeService;
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/get-all")
     public String getAll(Model model) {
         model.addAttribute("expenseList", expenseService.findAllExpense());
@@ -36,12 +41,24 @@ public class ExpenseController {
         return "expense/viewExpense";
     }
 
+    /**
+     * get mapping for create expense page
+     * @param model
+     * @return
+     */
     @GetMapping("/create")
     public String getCreateExpense(Model model) {
         model.addAttribute("expenseDetails", new ExpenseDto());
         return "expense/createExpense";
     }
 
+    /**
+     * post mapping for create rent page
+     * @param expenseDto
+     * @param bindingResult
+     * @param model
+     * @return
+     */
     @PostMapping("/create")
     public String postCreateExpense(@Valid @ModelAttribute("expenseDetails") ExpenseDto expenseDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

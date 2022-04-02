@@ -46,6 +46,12 @@ public class TaskController {
         model.addAttribute("pendingTaskList", taskService.yesterdayTask());
         return "task/pendingTask";
     }
+    @GetMapping("/complete")
+    public String getAllCompletedTask(Model model) {
+        //list of completed task
+        model.addAttribute("completeTaskList", taskService.showCompleteTask());
+        return "task/completedTask";
+    }
 
     /**
      * return create task page
@@ -137,4 +143,5 @@ public class TaskController {
         model.addAttribute("errorMessage", responseDto.getMessage());
         return "task/pendingTask";
     }
+
 }

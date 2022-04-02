@@ -37,14 +37,11 @@
                         th:href="@{~/}" class="logo">Assistant</a></button>
                 <div  class="collapse" id="dash-collapse">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                        <li><a th:href="@{~/change-password}" class="link-dark rounded task">Change Password</a></li>
-<!--                        <li>-->
-<!--                                        <a sec:authorize="isAuthenticated()" class="link-all" th:href="@{~/logout}">-->
-<!--                                            <button class="cssbuttons-io-button">-->
-<!--                                                <span>log out</span>-->
-<!--                                            </button>-->
-<!--                                        </a>-->
-<!--                        </li>-->
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{~/change-password}"
+                                                                 class="link-dark rounded task">Change Password</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{~/logout}" class="link-dark rounded task">Log out</a></li>
+
+
                     </ul>
                 </div>
                 </a></h1>

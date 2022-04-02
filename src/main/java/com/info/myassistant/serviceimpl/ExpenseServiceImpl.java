@@ -73,7 +73,9 @@ public class ExpenseServiceImpl extends BaseResponse implements ExpenseService {
 
     @Override
     public List<ExpenseDto> findAllExpense() {
+        //find list if expense for current user
         List<Expense> expenses = expenseRepo.findAllExpense(currentUserDetails.getCurrentUser());
+        //list of expenseDto after converting expense into dto
         return expenses.stream().map(expense -> new ExpenseDto(expense)).collect(Collectors.toList());
     }
 

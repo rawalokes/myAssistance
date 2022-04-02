@@ -88,14 +88,16 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
     @Override
     public List<TaskDto> showCompleteTask() {
         try {
+            //show completed task only
             List<Task> task=taskRepo.findTaskByTaskStatus
                     (TaskStatus.completed,currentUser.getCurrentUser());
             List<TaskDto> taskDtos=task.stream().map(currentTask ->new TaskDto(currentTask)).collect(Collectors.toList());
-//            successResponse("Added successfully",taskDtos);
+            return taskDtos;
         }catch (NullPointerException e){
-//            errorResponse("No data found",null);
+            e.printStackTrace();
+            return null;
         }
-        return null;
+
     }
 
     @Override
@@ -116,11 +118,16 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
 
     @Override
     public ResponseDto markTaskComplete(Integer id) {
+        //find task by id
         Optional<Task> task = taskRepo.findById(id);
         if (task.isPresent()) {
+            //get task
             Task dataBaseTask = task.get();
+            //set task status as completed
             dataBaseTask.setTaskStatus(TaskStatus.completed);
+            //update task
             taskRepo.save(dataBaseTask);
+            //return success response
             return successResponse("Task Marked as completed", null);
         } else {
             return errorResponse("No such task Found", null);
@@ -129,8 +136,10 @@ public class TaskServiceImpl extends BaseResponse implements TaskService {
 
     @Override
     public ResponseDto findByDate() {
+        //find task by date
         List<Task> tasks = taskRepo.findTaskByDate(LocalDate.now(), currentUser.getCurrentUser());
         if (tasks != null)
+
             return successResponse("", tasks);
         else
             return errorResponse("No Data Found", null);

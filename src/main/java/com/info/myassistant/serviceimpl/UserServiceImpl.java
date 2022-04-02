@@ -46,41 +46,57 @@ public class UserServiceImpl extends BaseResponse implements UserService {
     public ResponseDto create(UserDto userDto) {
 
         try {
+            //check if user is trying to register or updating his/her details
             if (userDto.getUserId() == null) {
+                //generate 8 digit random password
                 String password = PasswordGenerator.password();
+                //convert user dto into users
                 Users users = new Users(userDto);
-                sendEmail.sendEmail(users.getEmail(), users.getName(), password);
+                //set generated password as user password and encrypt it
                 users.setPassword(bCryptPasswordEncoder.encode(password));
                 userRepo.save(users);
+                //message to be sent to newly registered user
+                String message="Please change the password" +
+                        "\nClick on Assistant to change password";
+                ///send email with password and please change password message
+                sendEmail.sendEmail(users.getEmail(), users.getName(), password,message);
                 return successResponse("Users register successfully", null);
-            } else {
-
+            }
+            //if user is try his/her update its password
+            else {
+                //check if user enter same password twice
                 if (!userDto.getPassword().equals(userDto.getConfirmPassword())) {
-                    System.out.println(userDto.getPassword());
-                    System.out.println(userDto.getConfirmPassword());
-                    System.out.println(userDto.getPassword().equals(userDto.getConfirmPassword()));
                     return errorResponse("Password do not match", null);
                 }
+                //get currently log in user
                 Users currentUser = currentUserDetails.getCurrentUser();
+
                 userDto.setEmail(currentUser.getEmail());
                 userDto.setName(currentUser.getName());
+
                 Users users = new Users(userDto);
                 users.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-
-                sendEmail.sendEmail(userDto.getEmail(), users.getName(), "changed");
+                //send email saying password change
+                // and message is null as no need to say please change password for change password
+                sendEmail.sendEmail(userDto.getEmail(), users.getName(), "changed","");
                 userRepo.save(users);
                 return successResponse("Password Changed", null);
             }
         } catch (Exception e) {
+            //if unique constrain exception occur
             return errorResponse("Email already in use", null);
 
-        }    }
+        }
+    }
+
 
 
     @Override
     public ResponseDto findByID(Integer integer) {
+        //find user by id
         Optional<Users> user = userRepo.findById(integer);
         if (user.isPresent()) {
+            //if user is present return user
             return successResponse("", user.get());
         } else {
             return errorResponse("Users Not Found", null);
@@ -88,16 +104,18 @@ public class UserServiceImpl extends BaseResponse implements UserService {
 
     }
 
+
     @Override
     public UserDetails loadUserByUsername(String username) {
         try {
             Users users = userRepo.findByEmail(username);
-            if (users == null) {
-                errorResponse("user not found", null);
+            if (users == null){
+                return null;
             }
-            return new org.springframework.security.core.userdetails.User(users.getEmail(), users.getPassword(), mapRolesToAuthorities(users.getRoles()));
-
+            return new org.springframework.security.core.userdetails.User(users.getEmail()
+                    , users.getPassword(), mapRolesToAuthorities(users.getRoles()));
         } catch (InternalAuthenticationServiceException e) {
+
             e.printStackTrace();
             return null;
         }
@@ -107,4 +125,6 @@ public class UserServiceImpl extends BaseResponse implements UserService {
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
+
+
 }

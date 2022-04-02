@@ -42,15 +42,15 @@
             },
             yAxis: {
                 min: 0,
-                max:100,
+                max:5000,
                 title: {
                     text: 'Amount'
                 }
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">Rs. </td>' +
+                    '<td style="padding:0"><i>{point.y:.1f} </i></td></tr>',
                 footerFormat: '</table>',
                 shared: true,
                 useHTML: true

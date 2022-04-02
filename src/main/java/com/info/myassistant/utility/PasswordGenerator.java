@@ -8,6 +8,10 @@ import java.util.Random;
  * Time:3:51 AM
  */
 public class PasswordGenerator {
+    /**
+     * generate a random password of 8 character
+     * @return
+     */
     public static String password() {
         String uppercase="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String lowercase="abcdefghijklmnopqrstuvwxyz";
@@ -17,7 +21,7 @@ public class PasswordGenerator {
         String combo=uppercase+lowercase+num+specialChar;
         char [] password=new char[7];
         Random r=new Random();
-        for (int i=0;i<8;i++){
+        for (int i=0;i<7;i++){
             password[i]=combo.charAt(r.nextInt(combo.length()));
         }
         return new String(password);

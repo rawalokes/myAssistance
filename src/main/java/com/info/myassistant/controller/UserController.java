@@ -31,7 +31,6 @@ public class UserController {
     }
 
     /**
-     *
      * @return login page
      */
     @GetMapping("/login")
@@ -40,7 +39,6 @@ public class UserController {
     }
 
     /**
-     *
      * @param model
      * @return user register page
      */
@@ -51,7 +49,6 @@ public class UserController {
     }
 
     /**
-     *
      * @param userDto
      * @param bindingResult
      * @param model

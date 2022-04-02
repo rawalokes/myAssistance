@@ -19,9 +19,15 @@
     <div id="content" class="p-4 p-md-5 pt-5">
 
         <div id="btn-click">
-            <a class="link-all" th:href="@{~/task/pending}">
-                <button class="cssbuttons-io-button">
+            <a class=" link-all " th:href="@{~/task/pending}">
+                <button  class=" cssbuttons-io-button ">
                     <span>Pending Task</span>
+                </button>
+            </a>
+
+            <a class="link-all" th:href="@{~/task/complete}">
+                <button class="cssbuttons-io-button">
+                    <span>Complete Task</span>
                 </button>
             </a>
             <a class="link-all" th:href="@{~/task/pie}">
@@ -65,11 +71,11 @@
                     <td th:text="${task.remarks}"></td>
                     <td th:text="${task.date}"></td>
                     <td th:text="${task.taskStatus}"></td>
-
-                    <td>
-                      <a th:href="@{~/task/complete/{id} (id= ${task.taskId})}" >  <button type="button" class="btn btn-danger">Complete</button></a>
-                        <a th:href="@{~/task/edit/{id} (id= ${task.taskId})}" >  <button type="button" class="btn btn-success">Edit</button></a>
-
+                    <td >
+                      <a th:href="@{~/task/complete/{id} (id= ${task.taskId})}" >
+                          <button type="button" class="btn btn-success">Complete</button></a>
+                        <a th:href="@{~/task/edit/{id} (id= ${task.taskId})}" >
+                            <button type="button" class="btn btn-danger">Edit</button></a>
                     </td>
                 </tr>
 

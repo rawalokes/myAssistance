@@ -16,12 +16,9 @@
 <div class="wrapper d-flex align-items-stretch">
     <div th:insert="fragment/generics :: sidenavbar"></div>
     <div id="content" class="p-4 p-md-5 pt-5">
-        <div>
-<!--            <span sec:authentication="principal.username">User</span>-->
-        </div>
 
 
-        <div id="btn-click">
+        <div id="btn-click" sec:authorize="isAnonymous()" >
             <a class="link-all marginalButton " th:href="@{~/login}">
                 <button class="cssbuttons-io-button">
                     <span>Sign In</span>
@@ -32,7 +29,6 @@
                     <span>Sign Up</span>
                 </button>
             </a>
-
         </div>
         <div id="bg-image"></div>
         <div class="container-fluid">
